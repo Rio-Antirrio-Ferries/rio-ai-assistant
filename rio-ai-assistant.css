@@ -1,142 +1,144 @@
 #ai-chat-wrapper {
-    display: block !important;
-    visibility: visible !important;
-    position: relative !important;
-    z-index: 2147483647 !important;
-    font-family: &#39;Montserrat&#39;, Arial, sans-serif !important;
+    display:block !important;
+    visibility:visible !important;
+    position:relative !important;
+    z-index:2147483647 !important;
+    font-family:&#39;Montserrat&#39;,Arial,sans-serif !important;
 }
 
+/* 01. FLOATING BUTTON*/
+
 #ai-chat-fab {
-    position: fixed !important;
-    right: 18px !important;
-    bottom: 24px !important;
-    width: 44px !important;
-    height: 44px !important;
+    position:fixed !important;
+    right:20px !important;
+    bottom:24px !important;
+    width:44px !important;
+    height:44px !important;
 
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
 
-    padding: 0 !important;
-    border: 1px solid rgba(255, 255, 255, 0.28) !important;
-    border-radius: 50% !important;
+    padding:0 !important;
+
+    border:1px solid rgba(170,210,255,.38) !important;
+    border-radius:50% !important;
 
     background:
         linear-gradient(
             145deg,
-            #20b8b3 0%,
-            #078f94 55%,
-            #05636f 100%
+            #2E7DD1 0%,
+            #1257A6 52%,
+            #071F4A 100%
         ) !important;
 
-    color: #ffffff !important;
-    font-family: inherit !important;
-    font-size: 18px !important;
-    line-height: 1 !important;
-    cursor: pointer !important;
+    color:#F4F8FF !important;
+    font-family:inherit !important;
+    font-size:20px !important;
+    line-height:1 !important;
+
+    cursor:pointer !important;
 
     box-shadow:
-        0 7px 18px rgba(0, 50, 64, 0.36),
-        inset 0 1px 0 rgba(255, 255, 255, 0.22) !important;
+        0 7px 20px rgba(5,31,74,.42),
+        inset 0 1px 0 rgba(255,255,255,.24) !important;
 
     transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease,
-        filter 0.2s ease !important;
+        transform .2s ease,
+        box-shadow .2s ease,
+        filter .2s ease !important;
 
-    z-index: 2147483647 !important;
+    z-index:2147483647 !important;
 }
 
 #ai-chat-fab:hover,
 #ai-chat-fab:focus-visible {
-    transform: translateY(-2px) scale(1.04) !important;
-    filter: brightness(1.07) !important;
+    transform:translateY(-2px) scale(1.04) !important;
+    filter:brightness(1.08) !important;
 
     box-shadow:
-        0 10px 24px rgba(0, 50, 64, 0.46),
-        inset 0 1px 0 rgba(255, 255, 255, 0.28) !important;
+        0 10px 26px rgba(5,31,74,.50),
+        inset 0 1px 0 rgba(255,255,255,.30) !important;
 
-    outline: none !important;
+    outline:none !important;
 }
+
+
+/* 02. CHAT WINDOW */
 
 #ai-chat-window {
-    position: fixed !important;
-    right: 16px !important;
-    bottom: 140px !important;
+    position:fixed !important;
+    right:20px !important;
+    bottom:140px !important;
 
-    width: 350px !important;
-    max-width: calc(100vw - 30px) !important;
-    height: min(500px, calc(100vh - 160px)) !important;
+    width:340px !important;
+    max-width:calc(100vw - 30px) !important;
 
-    display: none;
-    flex-direction: column !important;
-    overflow: hidden !important;
+    height:min(500px,calc(100vh - 160px)) !important;
 
-    border: 1px solid rgba(71, 156, 158, 0.48) !important;
-    border-radius: 12px !important;
+    display:none;
+    flex-direction:column !important;
+
+    overflow:hidden !important;
+
+    border:1px solid rgba(78,142,211,.72) !important;
+    border-radius:12px !important;
 
     background:
-        radial-gradient(
-            circle at top,
-            rgba(238, 105, 65, 0.07),
-            transparent 32%
-        ),
-        radial-gradient(
-            circle at bottom right,
-            rgba(32, 184, 179, 0.08),
-            transparent 42%
-        ),
         linear-gradient(
-            135deg,
-            #00343e 0%,
-            #002a33 58%,
-            #00181e 100%
-        ) !important;
+            rgba(3,24,57,.46),
+            rgba(3,18,45,.58)
+        ),
+        url(&quot;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg-nf4XgX1WL8cqOKPNJOlqQaWRcH8SvKR7cLkiqP7oW4LqI8DnLj7sJam09B9_1RUlinyXWUn3PXS_PdRfXfts4VvglixHTivhrfuJT8aJzuSHY_ZM5OF1PKesaYL_4HDmsWeDbnQHaCb71TVKAZ7tiKzIv1-1Yi-hMHGSjTFJBEIxUjbceXAGsP17WP8/w400-h239-rw/Rio-Antirrio%20Nautical%20Map.png&quot;)
+        center center / cover no-repeat !important;
 
     box-shadow:
-        0 22px 58px rgba(0, 13, 27, 0.62),
-        inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+        0 18px 48px rgba(0,13,40,.64),
+        inset 0 1px 0 rgba(255,255,255,.08) !important;
 
-    backdrop-filter: blur(16px) saturate(118%) !important;
-    -webkit-backdrop-filter: blur(16px) saturate(118%) !important;
+    backdrop-filter:blur(16px) saturate(118%) !important;
+    -webkit-backdrop-filter:blur(16px) saturate(118%) !important;
 
-    z-index: 2147483647 !important;
+    z-index:2147483647 !important;
 }
 
-/* Κεφαλίδα */
+
+/* 03. HEADER */
+
 .ai-header {
-    min-height: 50px;
-    padding: 8px;
+    min-height:50px;
+    padding:8px;
 
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
 
-    color: #ffffff;
+    color:#ffffff;
 
     background:
         linear-gradient(
-            155deg,
-            #0f6570 0%,
-            #094b56 55%,
-            #06343f 100%
+            145deg,
+            rgba(18,87,166,.94) 0%,
+            rgba(10,52,120,.96) 52%,
+            rgba(7,31,74,.97) 100%
         );
 
-    border-bottom: 1px solid rgba(238,105,65,.45);
+    backdrop-filter:blur(2px);
+    -webkit-backdrop-filter:blur(2px);
 
-    box-shadow:
-        0 8px 22px rgba(0,15,27,.36);
+    box-shadow:0 8px 24px rgba(4,24,61,.40);
 }
 
-.ai-header-main{
+.ai-header-main {
     min-width:0;
+
     display:flex;
     align-items:center;
     gap:10px;
 }
 
-.ai-header-logo{
+.ai-header-logo {
     width:38px;
     height:38px;
     flex:0 0 38px;
@@ -145,90 +147,110 @@
     align-items:center;
     justify-content:center;
 
-    border:1px solid rgba(255,180,145,.30);
+    border:1px solid rgba(175,215,255,.32);
     border-radius:10px;
 
     background:
         linear-gradient(
             145deg,
-            #f06b42,
-            #cb3d28
+            #3D8FE1 0%,
+            #1763B8 55%,
+            #0A3478 100%
         );
 
-    color:#fff4ee;
+    color:#F4F8FF;
 
     box-shadow:
-        0 4px 12px rgba(160,60,30,.25),
-        inset 0 1px 0 rgba(255,255,255,.15);
+        0 4px 14px rgba(4,31,79,.34),
+        inset 0 1px 0 rgba(255,255,255,.20);
 
     font-size:20px;
 }
 
-.ai-header-copy{
+.ai-header-copy {
     min-width:0;
+
     display:flex;
     flex-direction:column;
+
     line-height:1.16;
 }
 
-.ai-header-title{
+.ai-header-title {
     overflow:hidden;
+
     color:#ffffff;
+
     font-size:15px;
     font-weight:600;
+
     text-overflow:ellipsis;
     white-space:nowrap;
 }
 
-.ai-header-status{
+.ai-header-status {
     margin-top:6px;
+
     display:inline-flex;
     align-items:center;
     gap:6px;
 
-    color:rgba(236,248,249,.82);
+    color:rgba(236,246,255,.84);
+
     font-size:12px;
     font-weight:500;
 }
 
-.ai-header-status::before{
+.ai-header-status::before {
     width:7px;
     height:7px;
+
     display:inline-block;
 
     border-radius:50%;
+
     background:#35d982;
 
-    box-shadow:
-        0 0 8px rgba(53,217,130,.82);
+    box-shadow:0 0 8px rgba(53,217,130,.82);
 
     content:&quot;&quot;;
 }
 
-.ai-header-status.is-closed::before{
+.ai-header-status.is-closed::before {
     background:#ff5f6d;
-
-    box-shadow:
-        0 0 8px rgba(255,95,109,.82);
+    box-shadow:0 0 8px rgba(255,95,109,.82);
 }
 
-.ai-header-close{
+
+/* 04. HEADER BUTTONS */
+
+.ai-header-actions {
+    display:flex;
+    align-items:center;
+    gap:6px;
+}
+
+.ai-header-close,
+.ai-header-reset {
     width:33px;
     height:33px;
     flex:0 0 33px;
 
-    display:flex;
-    align-items:center;
-    justify-content:center;
+    display:grid;
+    place-items:center;
 
     padding:0;
-    border:1px solid rgba(255,255,255,.12);
+
+    border:1px solid rgba(180,215,255,.16);
     border-radius:11px;
 
     background:rgba(255,255,255,.08);
-    color:#fff1e8;
+
+    color:#F4F8FF;
 
     font-size:18px;
+    line-height:1;
+
     cursor:pointer;
 
     transition:
@@ -238,259 +260,236 @@
 }
 
 .ai-header-close:hover,
-.ai-header-close:focus-visible{
-    border-color:rgba(255,255,255,.28);
-    background:rgba(255,255,255,.16);
-    transform:scale(1.05);
-    outline:none;
-}
-
-.ai-header-actions{
-    display:flex;
-    align-items:center;
-    gap:6px;
-}
-
-.ai-header-reset{
-    width:33px;
-    height:33px;
-    flex:0 0 33px;
-
-    display:grid;
-    place-items:center;
-
-    padding:0;
-
-    border:1px solid rgba(255,255,255,.12);
-    border-radius:11px;
-
-    background:rgba(255,255,255,.08);
-    color:#fff1e8;
-
-    font-size:18px;
-    line-height:1;
-
-    cursor:pointer;
-
-    transition:
-        background .2s ease,
-        border-color .2s ease,
-        transform .2s ease;
-}
-
+.ai-header-close:focus-visible,
 .ai-header-reset:hover,
-.ai-header-reset:focus-visible{
-    border-color:rgba(255,255,255,.28);
+.ai-header-reset:focus-visible {
+    border-color:rgba(190,220,255,.30);
+
     background:rgba(255,255,255,.16);
+
     transform:scale(1.05);
+
     outline:none;
 }
 
-/* Περιοχή συνομιλίας */
+
+/* 05. CHAT BODY */
+
 .ai-body {
-    flex: 1;
-    padding: 15px 13px;
+    flex:1;
 
-    overflow-y: auto;
+    padding:15px 13px;
 
-    display: flex;
-    flex-direction: column;
-    gap: 11px;
+    overflow-y:auto;
 
-    background:
-        radial-gradient(
-            circle at top,
-            rgba(238,105,65,.08),
-            transparent 32%
-        ),
-        radial-gradient(
-            circle at bottom right,
-            rgba(32,184,179,.08),
-            transparent 40%
-        ),
-        linear-gradient(
-            135deg,
-            #00343e 0%,
-            #002a33 55%,
-            #00181e 100%
-        ) !important;
+    display:flex;
+    flex-direction:column;
+    gap:11px;
 
-    scrollbar-color: #ee6941 transparent;
-    scrollbar-width: thin;
+    background:transparent !important;
+
+    scrollbar-color:#2E7DD1 transparent;
+    scrollbar-width:thin;
 }
-/* Κοινή εμφάνιση μηνυμάτων */
+
+
+/* 06. MESSAGES */
+
 .ai-msg {
-    max-width: 92%;
-    padding: 12px 15px;
+    max-width:94%;
 
-    border-radius: 18px;
+    padding:12px 14px;
 
-    font-size: 15px;
-    font-weight: 400 !important;
-    line-height: 1.62;
+    border-radius:18px;
 
-    word-break: break-word;
+    font-size:15px;
+    font-weight:400 !important;
+    line-height:1.62;
+
+    word-break:break-word;
 
     box-shadow:
-        0 12px 28px rgba(0,40,55,.20),
+        0 12px 28px rgba(0,40,75,.20),
         0 2px 8px rgba(0,0,0,.08);
 }
 
-/* Μήνυμα βοηθού */
-.ai-msg.bot {
-    align-self: flex-start;
 
-    border: 1px solid rgba(0, 84, 99, 0.55);
-    border-bottom-left-radius: 8px;
+/* 07. ASSISTANT MESSAGE */
+
+.ai-msg.bot {
+    align-self:flex-start;
+
+    border:1px solid rgba(110,170,225,.42);
+    border-bottom-left-radius:8px;
 
     background:
         linear-gradient(
             155deg,
-            #0A6676 0%,
-            #005463 55%,
-            #003C47 100%
+            #183F68 0%,
+            #102F52 55%,
+            #091F39 100%
         );
 
-    color: #f4fcfd;
+    color:#F4F8FF;
 
     box-shadow:
-        0 10px 24px rgba(0, 0, 0, 0.28),
-        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        0 10px 26px rgba(3,20,48,.34),
+        inset 0 1px 0 rgba(255,255,255,.08);
 }
 
-/* Ήπια έμφαση μέσα στις απαντήσεις */
 .ai-msg.bot,
 .ai-msg.bot p,
 .ai-msg.bot li,
 .ai-msg.bot span {
-    font-weight: 400 !important;
+    font-weight:400 !important;
 }
 
 .ai-msg.bot strong,
 .ai-msg.bot b {
-    font-weight: 600 !important;
+    font-weight:500 !important;
 }
 
-/* Μήνυμα χρήστη */
-.ai-msg.user {
-    align-self: flex-end;
 
-    border: 1px solid rgba(255, 165, 126, 0.40);
-    border-bottom-right-radius: 8px;
+/* 08. USER MESSAGE */
+
+.ai-msg.user {
+    align-self:flex-end;
+
+    border:1px solid rgba(135,190,255,.42);
+    border-bottom-right-radius:8px;
 
     background:
         linear-gradient(
             145deg,
-            #ee6941 0%,
-            #d94b31 60%,
-            #b93628 100%
+            #2E7DD1 0%,
+            #1257A6 58%,
+            #0A3478 100%
         );
 
-    color: #fff1e8;
-    font-weight: 500 !important;
+    color:#F4F8FF;
 
-    box-shadow:
-        0 10px 24px rgba(160, 60, 30, 0.25);
+    font-weight:400 !important;
+
+    box-shadow:0 10px 24px rgba(5,38,91,.28);
 }
 
-/* Σύνδεσμοι */
+
+/* 09. LINKS */
+
 .ai-msg.bot a,
 .ai-msg.bot a:visited {
-    display: inline-block !important;
-    margin: 10px 0 !important;
-    padding: 4px 0 !important;
-    color: #ff9874 !important;
-    font-weight: 600 !important;
-    text-decoration: underline !important;
-    text-underline-offset: 4px !important;
+    display:inline-block !important;
+
+    margin:10px 0 !important;
+    padding:4px 0 !important;
+
+    color:#86C5FF !important;
+
+    font-weight:600 !important;
+
+    text-decoration:underline !important;
+    text-underline-offset:4px !important;
 }
 
 .ai-msg.bot a:hover,
 .ai-msg.bot a:focus {
-    color: #ffc1a8 !important;
+    color:#C6E6FF !important;
 }
 
-/* Ώρες δρομολογίων */
+
+/* 10. TIME ITEMS */
+
 .ai-time-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    line-height: 1.5;
+    display:flex;
+    flex-wrap:wrap;
+
+    gap:8px;
+
+    line-height:1.62;
 }
 
 .ai-time-item {
-    min-height: 30px;
+    min-height:30px;
 
-    display: inline-flex;
-    align-items: center;
+    display:inline-flex;
+    align-items:center;
 
-    padding: 5px 10px;
+    padding:6px 10px;
 
-    border: 1px solid rgba(0,84,99,.25);
-    border-radius: 10px;
+    border:1px solid rgba(90,160,225,.32);
+    border-radius:10px;
 
     background:
         linear-gradient(
             145deg,
-            #0A6676,
-            #005463
+            #183F68 0%,
+            #102F52 100%
         );
 
     color:#ffffff;
+
     font-weight:500 !important;
 
-    box-shadow:
-        0 4px 12px rgba(0,84,99,.18);
+    box-shadow:0 4px 12px rgba(3,30,70,.24);
 }
 
-/* Κάτω περιοχή */
-.ai-footer {
-    display: flex;
-    align-items: center;
-    gap: 8px;
 
-    padding: 8px;
+/* 11. FOOTER */
+
+.ai-footer {
+    display:flex;
+    align-items:center;
+    gap:8px;
+
+    padding:6px;
 
     background:
         linear-gradient(
-            155deg,
-            #0f6570 0%,
-            #094b56 55%,
-            #06343f 100%
+            145deg,
+            rgba(18,87,166,.94) 0%,
+            rgba(10,52,120,.96) 52%,
+            rgba(7,31,74,.97) 100%
         );
 
-    border-top: 1px solid rgba(238,105,65,.28);
+    backdrop-filter:blur(2px);
+    -webkit-backdrop-filter:blur(2px);
 
-    box-shadow:
-        inset 0 1px 0 rgba(255,255,255,.05),
-        0 -6px 18px rgba(0,0,0,.18);
+    box-shadow:0 8px 20px rgba(4,24,61,.40);
 }
 
-/* Πεδίο εισαγωγής */
+
+/* 12. INPUT */
+
 .ai-footer input {
-    min-width: 0;
-    flex: 1;
-    padding: 11px 13px;
+    min-width:0;
+    flex:1;
 
-    border: 1px solid rgba(255,185,149,.6);
-    border-radius: 20px;
+    padding:9px 11px;
 
-    background: linear-gradient(
-        175deg,
-        #ee6941 0%,
-        #d94b31 55%,
-        #b93628 100%
-    );
+    border:1px solid rgba(150,200,255,.52);
+    border-radius:20px;
 
-    color: #fff1e8;
-    font-size: 14.5px;
-    font-weight: 500;
+    background:
+        linear-gradient(
+            180deg,
+            #2E7DD1 0%,
+            #1257A6 55%,
+            #0A3478 100%
+        );
 
-    outline: none;
+    color:#F4F8FF;
+
+    font-size:15px;
+    font-weight:400;
+
+    letter-spacing:.15px;
+    line-height:1.35;
+
+    outline:none;
 
     box-shadow:
-        0 8px 20px rgba(143,40,26,.20),
-        inset 0 1px 0 rgba(255,255,255,.15);
+        0 8px 20px rgba(5,38,91,.24),
+        inset 0 1px 0 rgba(255,255,255,.16);
 
     transition:
         border-color .2s ease,
@@ -498,33 +497,38 @@
         background .2s ease;
 }
 
-.ai-footer input::placeholder{
-    color: rgba(255,241,232,.75);
-    font-weight: 400;
+.ai-footer input::placeholder {
+    color:rgba(235,245,255,.78);
+
     font-size:12px;
+    font-weight:400;
 }
 
-.ai-footer input:focus{
-    border-color:rgba(255,185,149,.9);
+.ai-footer input:focus {
+    border-color:rgba(180,220,255,.90);
 
-    background:linear-gradient(
-        155deg,
-        #f1764d 0%,
-        #e25b39 55%,
-        #c6402c 100%
-    );
+    background:
+        linear-gradient(
+            180deg,
+            #3989DC 0%,
+            #1763B8 55%,
+            #0A3C87 100%
+        );
 
     box-shadow:
-        0 0 0 3px rgba(238,105,65,.20),
-        0 8px 20px rgba(143,40,26,.30),
+        0 0 0 3px rgba(46,125,209,.20),
+        0 8px 20px rgba(5,38,91,.30),
         inset 0 1px 0 rgba(255,255,255,.20);
 }
 
-/* Κουμπί αποστολής */
-.ai-footer button{
+
+/* 13. SEND BUTTON */
+
+.ai-footer button {
     width:36px;
     height:36px;
     flex:0 0 36px;
+
     aspect-ratio:1/1;
 
     display:grid;
@@ -533,17 +537,19 @@
     padding:0;
     margin:0;
 
-    border:1px solid rgba(255,185,149,.6);
+    border:1px solid rgba(150,200,255,.55);
     border-radius:50%;
 
-    background:linear-gradient(
-        155deg,
-        #ee6941 0%,
-        #d94b31 55%,
-        #b93628 100%
-    );
+    background:
+        linear-gradient(
+            135deg,
+            #2E7DD1 0%,
+            #1257A6 55%,
+            #071F4A 100%
+        );
 
-    color: #fff1e8;
+    color:#F4F8FF;
+
     font-size:17px;
     font-weight:700;
     line-height:1;
@@ -551,8 +557,8 @@
     cursor:pointer;
 
     box-shadow:
-        0 8px 20px rgba(143,40,26,.39),
-        inset 0 1px 0 rgba(255,255,255,.25);
+        0 8px 20px rgba(5,38,91,.38),
+        inset 0 1px 0 rgba(255,255,255,.24);
 
     transition:
         transform .2s ease,
@@ -561,80 +567,181 @@
 }
 
 .ai-footer button:hover,
-.ai-footer button:focus-visible{
+.ai-footer button:focus-visible {
     transform:translateY(-1px) scale(1.03);
-    filter:brightness(1.08);
+
+    filter:brightness(1.10);
 
     box-shadow:
-        0 11px 25px rgba(143,40,26,.46),
+        0 11px 25px rgba(5,38,91,.46),
         inset 0 1px 0 rgba(255,255,255,.30);
 
     outline:none;
 }
 
-/* Κινητά */
-@media (max-width: 480px) {
+
+/* 14. MOBILE - PORTRAIT */
+
+@media (max-width:480px) {
 
     #ai-chat-window {
-        right: 6px !important;
-        bottom: 128px !important;
+        right:5px !important;
+        bottom:130px !important;
 
-        width: calc(100vw - 12px) !important;
-        max-width: none !important;
+        width:calc(100vw - 10px) !important;
+        max-width:none !important;
 
-        height: min(72vh, 620px) !important;
-        max-height: calc(100dvh - 110px) !important;
+        height:min(72vh,620px) !important;
+        max-height:calc(100dvh - 112px) !important;
 
-        border-radius: 14px !important;
+        border-radius:14px !important;
+
+        background-position:center center !important;
+        background-size:cover !important;
     }
 
     #ai-chat-fab {
-        right: 12px !important;
-        bottom: 34px !important;
+        right:12px !important;
+        bottom:36px !important;
 
-        width: 58px !important;
-        height: 58px !important;
+        width:56px !important;
+        height:56px !important;
 
-        font-size: 26px !important;
+        font-size:28px !important;
     }
 
     .ai-msg {
-        max-width: 94%;
-        font-size: 14.5px;
-        line-height: 1.6;
+        max-width:92%;
+
+        font-size:15px;
+        line-height:1.6;
     }
 
     .ai-footer {
-        padding: 8px;
+        padding:8px;
     }
 
     .ai-footer input {
-        font-size: 14.5px;
+        font-size:15px;
     }
 
     .ai-footer input::placeholder {
-        font-size: 12px;
+        font-size:11.5px;
     }
 
     .ai-header-title {
-        font-size: 15px;
+        font-size:15px;
     }
 
     .ai-header-status {
-        font-size: 12px;
+        font-size:12px;
     }
 }
 
-/* Μείωση κινήσεων */
-@media (prefers-reduced-motion: reduce) {
+
+/* 15. MOBILE - LANDSCAPE */
+
+@media (max-height:500px) and (orientation:landscape) {
+
+    #ai-chat-window {
+        top:8px !important;
+        bottom:8px !important;
+        right:10px !important;
+
+        width:min(430px,62vw) !important;
+        max-width:calc(100vw - 20px) !important;
+
+        height:auto !important;
+        max-height:none !important;
+
+        border-radius:12px !important;
+
+        background-position:center center !important;
+        background-size:cover !important;
+    }
+
+    #ai-chat-fab {
+        right:12px !important;
+        bottom:14px !important;
+
+        width:48px !important;
+        height:48px !important;
+
+        font-size:23px !important;
+    }
+
+    .ai-header {
+        min-height:42px !important;
+        padding:5px 7px !important;
+    }
+
+    .ai-header-logo {
+        width:32px !important;
+        height:32px !important;
+        flex:0 0 32px !important;
+
+        font-size:17px !important;
+    }
+
+    .ai-header-status {
+        margin-top:2px !important;
+    }
+
+    .ai-body {
+        padding:8px 10px !important;
+    }
+
+    .ai-footer {
+        padding:5px !important;
+    }
+
+    .ai-footer input {
+        padding:8px 10px !important;
+    }
+}
+
+
+/* 16. TABLET */
+
+@media (min-width:481px) and (max-width:900px) and (min-height:501px) {
+
+    #ai-chat-window {
+        right:14px !important;
+        bottom:120px !important;
+
+        width:min(410px,calc(100vw - 28px)) !important;
+        max-width:none !important;
+
+        height:min(600px,72vh) !important;
+        max-height:calc(100dvh - 145px) !important;
+
+        border-radius:14px !important;
+
+        background-position:center center !important;
+        background-size:cover !important;
+    }
+
+    #ai-chat-fab {
+        right:16px !important;
+        bottom:30px !important;
+
+        width:54px !important;
+        height:54px !important;
+
+        font-size:25px !important;
+    }
+}
+
+
+/* 17. REDUCED MOTION */
+
+@media (prefers-reduced-motion:reduce) {
 
     #ai-chat-fab,
     .ai-header-close,
     .ai-header-reset,
     .ai-footer input,
     .ai-footer button {
-
-        transition: none !important;
+        transition:none !important;
     }
-
 }

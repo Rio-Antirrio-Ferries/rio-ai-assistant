@@ -4047,7 +4047,7 @@
         const body = document.getElementById('aiChatBody');
         if (body) {
             body.innerHTML =
-                '<div class="ai-msg bot">Καλώς ήρθατε! Πώς μπορώ να σας βοηθήσω σχετικά με το πορθμείο Ρίου–Αντιρρίου;</div>';
+            '<div class="ai-msg bot">Γεια σας! Είμαι ο Rio-Antirrio Ai Assistant. Πώς μπορώ να σας βοηθήσω σχετικά με το πορθμείο;</div>';
         }
 
         const input = document.getElementById('aiInput');

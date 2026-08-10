@@ -923,6 +923,48 @@ GitHub
 αφαίρεση redundant inline κώδικα
 
 ---
+## ✅ Ολοκλήρωση GitHub Pages Migration — 10 Αυγούστου 2026
+
+Η μετάβαση του Rio–Antirrio AI Assistant από μεγάλο inline κώδικα του Blogger σε εξωτερικά αρχεία ολοκληρώθηκε επιτυχώς στις **10 Αυγούστου 2026**.
+
+Η τελική ενεργή αρχιτεκτονική είναι:
+
+```text
+Blogger
+   ↓
+HTML Shell / Loader
+   ↓
+GitHub Pages
+   ├── rio-ai-assistant.css
+   ├── rio-ai-assistant-knowledge.js
+   └── rio-ai-assistant-engine.js
+```
+
+Τα τρία εξωτερικά αρχεία φορτώνονται από:
+
+```text
+https://rio-antirrio-ferries.github.io/rio-ai-assistant/
+```
+
+Η σειρά φόρτωσης παραμένει υποχρεωτικά:
+
+```text
+CSS → Knowledge → Engine
+```
+
+Στο Blogger παραμένει μόνο το μικρό HTML shell/loader του Assistant, οριοθετημένο με:
+
+```html
+<!-- AI Smart ChatBox start -->
+...
+<!-- AI Smart ChatBox Ends -->
+```
+
+Μετά τη μετάβαση πραγματοποιήθηκαν live δοκιμές και επιβεβαιώθηκε ότι ο Assistant λειτουργεί κανονικά χωρίς αισθητή απώλεια ταχύτητας ή λειτουργικότητας.
+
+Το **FINAL MASTER της 10ης Αυγούστου 2026 παραμένει ανέγγιχτο και αποτελεί το ασφαλές αρχικό σημείο αναφοράς. 🔒**
+
+Από αυτό το σημείο και μετά, οι αλλαγές γίνονται στα αντίστοιχα εξωτερικά αρχεία του GitHub και καταγράφονται με Git commits. Δεν επαναφέρουμε ολόκληρο τον CSS, Knowledge ή Engine inline στο Blogger χωρίς συγκεκριμένο λόγο και ελεγχόμενο rollback plan.
 
 # 38. Σημαντικός κανόνας deployment
 

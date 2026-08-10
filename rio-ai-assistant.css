@@ -3,7 +3,7 @@
     visibility:visible !important;
     position:relative !important;
     z-index:2147483647 !important;
-    font-family:&#39;Montserrat&#39;,Arial,sans-serif !important;
+    font-family:'Montserrat',Arial,sans-serif !important;
 }
 
 /* 01. FLOATING BUTTON*/
@@ -89,7 +89,7 @@
             rgba(3,24,57,.46),
             rgba(3,18,45,.58)
         ),
-        url(&quot;https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg-nf4XgX1WL8cqOKPNJOlqQaWRcH8SvKR7cLkiqP7oW4LqI8DnLj7sJam09B9_1RUlinyXWUn3PXS_PdRfXfts4VvglixHTivhrfuJT8aJzuSHY_ZM5OF1PKesaYL_4HDmsWeDbnQHaCb71TVKAZ7tiKzIv1-1Yi-hMHGSjTFJBEIxUjbceXAGsP17WP8/w400-h239-rw/Rio-Antirrio%20Nautical%20Map.png&quot;)
+        url("https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg-nf4XgX1WL8cqOKPNJOlqQaWRcH8SvKR7cLkiqP7oW4LqI8DnLj7sJam09B9_1RUlinyXWUn3PXS_PdRfXfts4VvglixHTivhrfuJT8aJzuSHY_ZM5OF1PKesaYL_4HDmsWeDbnQHaCb71TVKAZ7tiKzIv1-1Yi-hMHGSjTFJBEIxUjbceXAGsP17WP8/w400-h239-rw/Rio-Antirrio%20Nautical%20Map.png")
         center center / cover no-repeat !important;
 
     box-shadow:
@@ -213,7 +213,7 @@
 
     box-shadow:0 0 8px rgba(53,217,130,.82);
 
-    content:&quot;&quot;;
+    content:"";
 }
 
 .ai-header-status.is-closed::before {

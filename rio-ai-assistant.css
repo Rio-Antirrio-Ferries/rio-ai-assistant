@@ -1,0 +1,640 @@
+#ai-chat-wrapper {
+    display: block !important;
+    visibility: visible !important;
+    position: relative !important;
+    z-index: 2147483647 !important;
+    font-family: &#39;Montserrat&#39;, Arial, sans-serif !important;
+}
+
+#ai-chat-fab {
+    position: fixed !important;
+    right: 18px !important;
+    bottom: 24px !important;
+    width: 44px !important;
+    height: 44px !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    padding: 0 !important;
+    border: 1px solid rgba(255, 255, 255, 0.28) !important;
+    border-radius: 50% !important;
+
+    background:
+        linear-gradient(
+            145deg,
+            #20b8b3 0%,
+            #078f94 55%,
+            #05636f 100%
+        ) !important;
+
+    color: #ffffff !important;
+    font-family: inherit !important;
+    font-size: 18px !important;
+    line-height: 1 !important;
+    cursor: pointer !important;
+
+    box-shadow:
+        0 7px 18px rgba(0, 50, 64, 0.36),
+        inset 0 1px 0 rgba(255, 255, 255, 0.22) !important;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        filter 0.2s ease !important;
+
+    z-index: 2147483647 !important;
+}
+
+#ai-chat-fab:hover,
+#ai-chat-fab:focus-visible {
+    transform: translateY(-2px) scale(1.04) !important;
+    filter: brightness(1.07) !important;
+
+    box-shadow:
+        0 10px 24px rgba(0, 50, 64, 0.46),
+        inset 0 1px 0 rgba(255, 255, 255, 0.28) !important;
+
+    outline: none !important;
+}
+
+#ai-chat-window {
+    position: fixed !important;
+    right: 16px !important;
+    bottom: 140px !important;
+
+    width: 350px !important;
+    max-width: calc(100vw - 30px) !important;
+    height: min(500px, calc(100vh - 160px)) !important;
+
+    display: none;
+    flex-direction: column !important;
+    overflow: hidden !important;
+
+    border: 1px solid rgba(71, 156, 158, 0.48) !important;
+    border-radius: 12px !important;
+
+    background:
+        radial-gradient(
+            circle at top,
+            rgba(238, 105, 65, 0.07),
+            transparent 32%
+        ),
+        radial-gradient(
+            circle at bottom right,
+            rgba(32, 184, 179, 0.08),
+            transparent 42%
+        ),
+        linear-gradient(
+            135deg,
+            #00343e 0%,
+            #002a33 58%,
+            #00181e 100%
+        ) !important;
+
+    box-shadow:
+        0 22px 58px rgba(0, 13, 27, 0.62),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+
+    backdrop-filter: blur(16px) saturate(118%) !important;
+    -webkit-backdrop-filter: blur(16px) saturate(118%) !important;
+
+    z-index: 2147483647 !important;
+}
+
+/* Κεφαλίδα */
+.ai-header {
+    min-height: 50px;
+    padding: 8px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+
+    color: #ffffff;
+
+    background:
+        linear-gradient(
+            155deg,
+            #0f6570 0%,
+            #094b56 55%,
+            #06343f 100%
+        );
+
+    border-bottom: 1px solid rgba(238,105,65,.45);
+
+    box-shadow:
+        0 8px 22px rgba(0,15,27,.36);
+}
+
+.ai-header-main{
+    min-width:0;
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.ai-header-logo{
+    width:38px;
+    height:38px;
+    flex:0 0 38px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border:1px solid rgba(255,180,145,.30);
+    border-radius:10px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #f06b42,
+            #cb3d28
+        );
+
+    color:#fff4ee;
+
+    box-shadow:
+        0 4px 12px rgba(160,60,30,.25),
+        inset 0 1px 0 rgba(255,255,255,.15);
+
+    font-size:20px;
+}
+
+.ai-header-copy{
+    min-width:0;
+    display:flex;
+    flex-direction:column;
+    line-height:1.16;
+}
+
+.ai-header-title{
+    overflow:hidden;
+    color:#ffffff;
+    font-size:15px;
+    font-weight:600;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
+
+.ai-header-status{
+    margin-top:6px;
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+
+    color:rgba(236,248,249,.82);
+    font-size:12px;
+    font-weight:500;
+}
+
+.ai-header-status::before{
+    width:7px;
+    height:7px;
+    display:inline-block;
+
+    border-radius:50%;
+    background:#35d982;
+
+    box-shadow:
+        0 0 8px rgba(53,217,130,.82);
+
+    content:&quot;&quot;;
+}
+
+.ai-header-status.is-closed::before{
+    background:#ff5f6d;
+
+    box-shadow:
+        0 0 8px rgba(255,95,109,.82);
+}
+
+.ai-header-close{
+    width:33px;
+    height:33px;
+    flex:0 0 33px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    padding:0;
+    border:1px solid rgba(255,255,255,.12);
+    border-radius:11px;
+
+    background:rgba(255,255,255,.08);
+    color:#fff1e8;
+
+    font-size:18px;
+    cursor:pointer;
+
+    transition:
+        background .2s ease,
+        border-color .2s ease,
+        transform .2s ease;
+}
+
+.ai-header-close:hover,
+.ai-header-close:focus-visible{
+    border-color:rgba(255,255,255,.28);
+    background:rgba(255,255,255,.16);
+    transform:scale(1.05);
+    outline:none;
+}
+
+.ai-header-actions{
+    display:flex;
+    align-items:center;
+    gap:6px;
+}
+
+.ai-header-reset{
+    width:33px;
+    height:33px;
+    flex:0 0 33px;
+
+    display:grid;
+    place-items:center;
+
+    padding:0;
+
+    border:1px solid rgba(255,255,255,.12);
+    border-radius:11px;
+
+    background:rgba(255,255,255,.08);
+    color:#fff1e8;
+
+    font-size:18px;
+    line-height:1;
+
+    cursor:pointer;
+
+    transition:
+        background .2s ease,
+        border-color .2s ease,
+        transform .2s ease;
+}
+
+.ai-header-reset:hover,
+.ai-header-reset:focus-visible{
+    border-color:rgba(255,255,255,.28);
+    background:rgba(255,255,255,.16);
+    transform:scale(1.05);
+    outline:none;
+}
+
+/* Περιοχή συνομιλίας */
+.ai-body {
+    flex: 1;
+    padding: 15px 13px;
+
+    overflow-y: auto;
+
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+
+    background:
+        radial-gradient(
+            circle at top,
+            rgba(238,105,65,.08),
+            transparent 32%
+        ),
+        radial-gradient(
+            circle at bottom right,
+            rgba(32,184,179,.08),
+            transparent 40%
+        ),
+        linear-gradient(
+            135deg,
+            #00343e 0%,
+            #002a33 55%,
+            #00181e 100%
+        ) !important;
+
+    scrollbar-color: #ee6941 transparent;
+    scrollbar-width: thin;
+}
+/* Κοινή εμφάνιση μηνυμάτων */
+.ai-msg {
+    max-width: 92%;
+    padding: 12px 15px;
+
+    border-radius: 18px;
+
+    font-size: 15px;
+    font-weight: 400 !important;
+    line-height: 1.62;
+
+    word-break: break-word;
+
+    box-shadow:
+        0 12px 28px rgba(0,40,55,.20),
+        0 2px 8px rgba(0,0,0,.08);
+}
+
+/* Μήνυμα βοηθού */
+.ai-msg.bot {
+    align-self: flex-start;
+
+    border: 1px solid rgba(0, 84, 99, 0.55);
+    border-bottom-left-radius: 8px;
+
+    background:
+        linear-gradient(
+            155deg,
+            #0A6676 0%,
+            #005463 55%,
+            #003C47 100%
+        );
+
+    color: #f4fcfd;
+
+    box-shadow:
+        0 10px 24px rgba(0, 0, 0, 0.28),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* Ήπια έμφαση μέσα στις απαντήσεις */
+.ai-msg.bot,
+.ai-msg.bot p,
+.ai-msg.bot li,
+.ai-msg.bot span {
+    font-weight: 400 !important;
+}
+
+.ai-msg.bot strong,
+.ai-msg.bot b {
+    font-weight: 600 !important;
+}
+
+/* Μήνυμα χρήστη */
+.ai-msg.user {
+    align-self: flex-end;
+
+    border: 1px solid rgba(255, 165, 126, 0.40);
+    border-bottom-right-radius: 8px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ee6941 0%,
+            #d94b31 60%,
+            #b93628 100%
+        );
+
+    color: #fff1e8;
+    font-weight: 500 !important;
+
+    box-shadow:
+        0 10px 24px rgba(160, 60, 30, 0.25);
+}
+
+/* Σύνδεσμοι */
+.ai-msg.bot a,
+.ai-msg.bot a:visited {
+    display: inline-block !important;
+    margin: 10px 0 !important;
+    padding: 4px 0 !important;
+    color: #ff9874 !important;
+    font-weight: 600 !important;
+    text-decoration: underline !important;
+    text-underline-offset: 4px !important;
+}
+
+.ai-msg.bot a:hover,
+.ai-msg.bot a:focus {
+    color: #ffc1a8 !important;
+}
+
+/* Ώρες δρομολογίων */
+.ai-time-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    line-height: 1.5;
+}
+
+.ai-time-item {
+    min-height: 30px;
+
+    display: inline-flex;
+    align-items: center;
+
+    padding: 5px 10px;
+
+    border: 1px solid rgba(0,84,99,.25);
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #0A6676,
+            #005463
+        );
+
+    color:#ffffff;
+    font-weight:500 !important;
+
+    box-shadow:
+        0 4px 12px rgba(0,84,99,.18);
+}
+
+/* Κάτω περιοχή */
+.ai-footer {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 8px;
+
+    background:
+        linear-gradient(
+            155deg,
+            #0f6570 0%,
+            #094b56 55%,
+            #06343f 100%
+        );
+
+    border-top: 1px solid rgba(238,105,65,.28);
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.05),
+        0 -6px 18px rgba(0,0,0,.18);
+}
+
+/* Πεδίο εισαγωγής */
+.ai-footer input {
+    min-width: 0;
+    flex: 1;
+    padding: 11px 13px;
+
+    border: 1px solid rgba(255,185,149,.6);
+    border-radius: 20px;
+
+    background: linear-gradient(
+        175deg,
+        #ee6941 0%,
+        #d94b31 55%,
+        #b93628 100%
+    );
+
+    color: #fff1e8;
+    font-size: 14.5px;
+    font-weight: 500;
+
+    outline: none;
+
+    box-shadow:
+        0 8px 20px rgba(143,40,26,.20),
+        inset 0 1px 0 rgba(255,255,255,.15);
+
+    transition:
+        border-color .2s ease,
+        box-shadow .2s ease,
+        background .2s ease;
+}
+
+.ai-footer input::placeholder{
+    color: rgba(255,241,232,.75);
+    font-weight: 400;
+    font-size:12px;
+}
+
+.ai-footer input:focus{
+    border-color:rgba(255,185,149,.9);
+
+    background:linear-gradient(
+        155deg,
+        #f1764d 0%,
+        #e25b39 55%,
+        #c6402c 100%
+    );
+
+    box-shadow:
+        0 0 0 3px rgba(238,105,65,.20),
+        0 8px 20px rgba(143,40,26,.30),
+        inset 0 1px 0 rgba(255,255,255,.20);
+}
+
+/* Κουμπί αποστολής */
+.ai-footer button{
+    width:36px;
+    height:36px;
+    flex:0 0 36px;
+    aspect-ratio:1/1;
+
+    display:grid;
+    place-items:center;
+
+    padding:0;
+    margin:0;
+
+    border:1px solid rgba(255,185,149,.6);
+    border-radius:50%;
+
+    background:linear-gradient(
+        155deg,
+        #ee6941 0%,
+        #d94b31 55%,
+        #b93628 100%
+    );
+
+    color: #fff1e8;
+    font-size:17px;
+    font-weight:700;
+    line-height:1;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 8px 20px rgba(143,40,26,.39),
+        inset 0 1px 0 rgba(255,255,255,.25);
+
+    transition:
+        transform .2s ease,
+        filter .2s ease,
+        box-shadow .2s ease;
+}
+
+.ai-footer button:hover,
+.ai-footer button:focus-visible{
+    transform:translateY(-1px) scale(1.03);
+    filter:brightness(1.08);
+
+    box-shadow:
+        0 11px 25px rgba(143,40,26,.46),
+        inset 0 1px 0 rgba(255,255,255,.30);
+
+    outline:none;
+}
+
+/* Κινητά */
+@media (max-width: 480px) {
+
+    #ai-chat-window {
+        right: 6px !important;
+        bottom: 128px !important;
+
+        width: calc(100vw - 12px) !important;
+        max-width: none !important;
+
+        height: min(72vh, 620px) !important;
+        max-height: calc(100dvh - 110px) !important;
+
+        border-radius: 14px !important;
+    }
+
+    #ai-chat-fab {
+        right: 12px !important;
+        bottom: 34px !important;
+
+        width: 58px !important;
+        height: 58px !important;
+
+        font-size: 26px !important;
+    }
+
+    .ai-msg {
+        max-width: 94%;
+        font-size: 14.5px;
+        line-height: 1.6;
+    }
+
+    .ai-footer {
+        padding: 8px;
+    }
+
+    .ai-footer input {
+        font-size: 14.5px;
+    }
+
+    .ai-footer input::placeholder {
+        font-size: 12px;
+    }
+
+    .ai-header-title {
+        font-size: 15px;
+    }
+
+    .ai-header-status {
+        font-size: 12px;
+    }
+}
+
+/* Μείωση κινήσεων */
+@media (prefers-reduced-motion: reduce) {
+
+    #ai-chat-fab,
+    .ai-header-close,
+    .ai-header-reset,
+    .ai-footer input,
+    .ai-footer button {
+
+        transition: none !important;
+    }
+
+}

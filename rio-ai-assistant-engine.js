@@ -1071,6 +1071,19 @@
             /^(?:ειναι|einai)\s+(?:του|tou)\s+(?:κρατους|kratous)$/.test(raw)
         ) return 'assistantAbout';
 
+        /* FINAL LOCKED TESTS — 11 Αυγούστου 2026. Narrow guards only. */
+        if (/^(?:σε\s+ποιον|se\s+poion)\s+(?:ανηκεις|anikeis)$/.test(raw) || /^(?:που|pou)\s+(?:ανηκεις|anikeis)$/.test(raw) || /^(?:ποιος|poios)\s+(?:ειναι\s+|einai\s+)?(?:ο\s+|o\s+)?(?:ιδιοκτητης|idioktitis)$/.test(raw) || /^(?:ποιος\s+ειναι\s+πισω\s+απο\s+εσενα|poios\s+einai\s+piso\s+apo\s+esena)$/.test(raw)) return 'assistantAbout';
+        if (/(?:ποτε|pote|τι\s+ωρα|ti\s+ora)\s+(?:σταματα|σταματαει|σταματουν|stamata|stamataei|stamatoun).*?(?:γραμμη|δρομολογια|καραβια|πλοια|grammi|dromologia|karavia|ploia)/.test(raw)) return 'continuousOperation';
+        if (/^(?:καθε\s+ποτε|kathe\s+pote)\s+(?:περναει|φευγει|εχει|pernaei|feugei|exei)\s+(?:(?:το|to)\s+)?(?:καραβι|πλοιο|karavi|ploio)$/.test(raw) || /^(?:πρωινα|απογευματινα|βραδινα|νυχτερινα|proina|apogeumatina|vradina|nyxterina)\s+(?:δρομολογια|dromologia)$/.test(raw) || /^(?:δρομολογια|dromologia)\s+(?:το\s+|τη\s+|ti\s+)?(?:πρωι|απογευμα|βραδυ|νυχτα|proi|apogeuma|vradi|nyxta)$/.test(raw)) return 'frequency';
+        if (/^(?:πως|πωσ|pos)\s+(?:παω|pao)\s+(?:στο|sto)\s+(?:καραβι|πλοιο|karavi|ploio)$/.test(raw) || /^(?:ποσο|poso)\s+(?:θελω|thelo)(?:\s+(?:χρονο|xrono))?\s+(?:για|μεχρι|gia|mexri)\s+(?:την|τη|tin|ti)\s+(?:προβλητα|provlita)$/.test(raw) || /^(?:ποσο|poso)\s+(?:απεχω|apexo)\s+(?:απο|apo)\s+(?:την|τη|tin|ti)\s+(?:προβλητα|provlita)$/.test(raw)) return 'distanceGps';
+        if (/(?:απο\s+)?(?:ποια|poia)\s+(?:προβλητα|provlita).*?(?:φευγει|αναχωρει|feugei|anaxorei).*?(?:καραβι|πλοιο|karavi|ploio)/.test(raw) || /(?:καραβι|πλοιο|karavi|ploio).*?(?:απο\s+)?(?:ποια|poia)\s+(?:προβλητα|provlita).*?(?:φευγει|αναχωρει|feugei|anaxorei)/.test(raw) || /(?:σε\s+ποια|se\s+poia)\s+(?:προβλητα|provlita)\s+(?:ειναι|einai)\s+(?:(?:το|to)\s+)?(?:καραβι|πλοιο|karavi|ploio)/.test(raw)) return 'departurePoint';
+        if (/(?:μηχανη|μηχανακι|μηχανακια|μοτο|mixani|mixanaki|mixanakia|moto|motor|scooter|παπι|papi)/.test(raw) && /(?:ποσο|ποσα|poso|posa|πληρωνει|πληρωνω|plironei|plirono|κανει|kanei|κοστιζει|kostizei|τιμη|timi|ναυλο|navlo)/.test(raw)) return 'prices';
+        if (/(?:πεζοι|πεζος|πεζο|pezoi|pezos)/.test(raw) && /(?:πληρων|κοστι|τιμη|ναυλο|δωρεαν|pliron|kost|timi|navlo|dorean)/.test(raw)) return 'passengerFare';
+        if (/(?:γεφυρα|gefura|gefyra|διοδια|diodia)/.test(raw) && /(?:ριο|αντιρριο|rio|antirrio|γεφυρα|gefura|gefyra|διοδια|diodia|τιμη|ποσο|οχημα|αμαξι|αυτοκινητο|μηχανακι|εκπτωτικ|sigrisi|συγκριση)/.test(raw)) return 'bridgeInfo';
+        if (/(?:πολυτεκν|politekn|polytekn|αμεα|amea|τριτεκν|tritekn)/.test(raw) && /(?:καρτα|δικαιολογητικ|ισχυ|εκπτωση|μειωμεν|ναυλο|οχημα|karta|dikaiolog|isxy|isxi|ekptosi|meiomen|navlo|oxima)/.test(raw)) return 'specialFareEligibility';
+        if (/(?:κατοικιδ|σκυλ|γατ|μελωδικ.*πτην|οικοσιτ|παραγωγικ.*ζω|κοτ|προβατ|κατσικ|αλογ|katoikid|skyl|gat|melodik.*ptin|oikosit|paragogik.*zo|kot|provat|katsik|alog)/.test(raw) && /(?:καραβι|πλοιο|επιτρεπ|μεταφερ|παρω|φερω|περασω|karavi|ploio|epitrep|metafer|paro|fero|peraso)/.test(raw)) return 'petsOnBoard';
+        if (/^(?:ποσα|ποια|ποιο|posa|poia|poio)\s+(?:πλοια|καραβια|πλοιο|καραβι|ploia|karavia|ploio|karavi).*?(?:δουλευουν|δουλευει|λειτουργουν|λειτουργει|εκτελουν|εκτελει|ειναι\s+σε\s+υπηρεσια|εχει\s+βαρδια|doulevoun|doulevei|leitourgoun|leitourgei|ekteloun|ektelei|einai\s+se\s+ypiresia|exei\s+vardia).*?(?:τωρα|tora)$/.test(raw)) return 'assignedVesselUnavailable';
+
         /* 02. ΘΕΣΗ ΠΛΟΙΩΝ — σαφείς ερωτήσεις προβλήτας/ανατολικά-δυτικά. */
         if (
             /^(?:ποιες\s+προβλητες\s+δουλευουν|poies\s+provlites\s+doulevoun)$/.test(raw) ||
@@ -2863,7 +2876,7 @@
         }
 
         return '<strong>Η ώρα είναι: ' + escapeHtml(currentTime) + '</strong><br><br>' +
-            '<strong>Επόμενο πλοίο:</strong><br>' +
+            '<strong>Επόμενο πλοίο:</strong><br><br>' +
             renderNext('Ρίο', rioTrips) + '<br>' +
             renderNext('Αντίρριο', antTrips);
     }
@@ -3483,7 +3496,7 @@
 
     function answerAssistantAbout() {
         return '<strong>Σχετικά με την υπηρεσία</strong><br><br>' +
-            'Η σελίδα <strong>Rio-Antirrio Ferries</strong>, η εφαρμογή <strong>Rio-Antirrio Live</strong> και ο ψηφιακός βοηθός <strong>Rio-Antirrio Assistant</strong> αποτελούν <strong>ιδιωτική πρωτοβουλία ενημέρωσης του επιβατικού κοινού</strong> για το πορθμείο Ρίου–Αντιρρίου, <strong>χωρίς οποιουδήποτε είδους υποστήριξη, εξάρτηση ή επίσημη σύνδεση με δημόσιο ή ιδιωτικό φορέα</strong>.<br><br>' +
+            'Η σελίδα <strong>Rio-Antirrio Ferries</strong>, η εφαρμογή <strong>Rio-Antirrio Live</strong> και ο ψηφιακός βοηθός <strong>Rio Ai Assistant</strong> αποτελούν <strong>ιδιωτική πρωτοβουλία ενημέρωσης του επιβατικού κοινού</strong> για το πορθμείο Ρίου–Αντιρρίου, <strong>χωρίς οποιουδήποτε είδους υποστήριξη, δέσμευση ή επίσημη σύνδεση με δημόσιο ή ιδιωτικό φορέα</strong>.<br><br>' +
             'Η λειτουργία τους έχει <strong>αποκλειστικά ενημερωτικό χαρακτήρα και δεν αποσκοπεί στην αποκόμιση οποιουδήποτε οικονομικού οφέλους</strong>.<br><br>' +
             'Η υπηρεσία <strong>δεν αποτελεί επίσημη υπηρεσία των Λιμενικών Αρχών, ούτε εργαλείο ενημέρωσης ή εκπροσώπησης των πλοιοκτητριών εταιρειών</strong> που δραστηριοποιούνται στη γραμμή.<br><br>' +
             'Οι πληροφορίες παρέχονται για τη διευκόλυνση και ενημέρωση των επιβατών και <strong>δεν υποκαθιστούν την επίσημη ενημέρωση των αρμόδιων Λιμενικών Αρχών</strong>.<br><br>' +
@@ -3555,11 +3568,29 @@
             centeredPhoneHtml();
     }
 
+    function answerBridgeInfo() {
+        return '<strong>Γέφυρα Ρίου–Αντιρρίου</strong><br><br>' +
+            'Ο Rio Ai Assistant παρέχει πληροφορίες για το <strong>Πορθμείο Ρίου–Αντιρρίου</strong> και ό,τι σχετίζεται με τη λειτουργία των πλοίων, όπως ώρες δρομολογίων, τιμές ναύλου, προβλήτες εργασίας και καιρικές συνθήκες που μπορεί να επηρεάσουν το πορθμείο.<br><br>' +
+            'Για <strong>τιμές διοδίων, οχήματα, εκπτωτικά προγράμματα και άλλες πληροφορίες σχετικά με τη Γέφυρα Ρίου–Αντιρρίου</strong>, παρακαλώ συμβουλευτείτε την επίσημη ιστοσελίδα της Γέφυρας.';
+    }
+
+    function answerSpecialFareEligibility() {
+        return '<strong>Ειδικές κατηγορίες μειωμένου ναύλου</strong><br><br>' +
+            'Ο μειωμένος ναύλος ειδικής κατηγορίας αφορά το <strong>όχημα</strong> και όχι τον επιβάτη, καθώς οι πεζοί επιβάτες μεταφέρονται δωρεάν.<br><br>' +
+            'Στον διαθέσιμο τιμοκατάλογο προβλέπεται ειδική κατηγορία για <strong>πολυτεκνικό όχημα και ΑμεΑ</strong>. Οι τρίτεκνοι δεν αναγνωρίζονται ως πολύτεκνοι για τη συγκεκριμένη κατηγορία.<br><br>' +
+            'Για έλεγχο και αποδοχή των δικαιολογητικών ειδικής κατηγορίας και την τελική εφαρμογή του μειωμένου ναύλου στο όχημά σας, επικοινωνήστε με το <strong>Λιμενικό Τμήμα Ρίου</strong> ή με αρμόδιο μέλος του πληρώματος πριν από την επιβίβαση.<br><br>' + centeredPhoneHtml();
+    }
+
+    function answerPetsOnBoard() {
+        return '<strong>Μεταφορά ζώων</strong><br><br>' +
+            'Τα ζώα συντροφιάς, όπως σκύλοι, γάτες και μελωδικά πτηνά, μπορούν να μεταφέρονται στο πλοίο υπό προϋποθέσεις και σύμφωνα με την ισχύουσα νομοθεσία.<br><br>' +
+            'Η μεταφορά οικόσιτων ή παραγωγικών ζώων δεν επιτρέπεται στη συγκεκριμένη πορθμειακή γραμμή.<br><br>' +
+            'Για σχετική ενημέρωση, ειδικές περιπτώσεις και προϋποθέσεις μεταφοράς ζώου στο πλοίο, επικοινωνήστε με το <strong>Λιμενικό Τμήμα Ρίου</strong>.<br><br>' + centeredPhoneHtml();
+    }
+
     function answerAssignedVesselUnavailable() {
         return '<strong>Η συγκεκριμένη πληροφορία δεν είναι διαθέσιμη</strong><br><br>' +
-            'Η σελίδα Rio-Antirrio Ferries και η εφαρμογή Rio-Antirrio Live δεν ' +
-            'διαθέτουν πληροφορία για το ποιο συγκεκριμένο πλοίο εκτελεί κάθε ' +
-            'δρομολόγιο, επειδή αυτό αφορά την εσωτερική λειτουργία και οργάνωση της γραμμής.';
+            'Η σελίδα <strong>Rio-Antirrio Ferries</strong>, η εφαρμογή <strong>Rio-Antirrio Live</strong> και ο <strong>Rio Ai Assistant</strong> δεν διαθέτουν πληροφορίες για το <strong>ποιο συγκεκριμένο πλοίο εκτελεί κάθε δρομολόγιο ή πόσα πλοία εργάζονται κάθε στιγμή</strong>, καθώς αυτά αφορούν την <strong>εσωτερική λειτουργία και επιχειρησιακή οργάνωση της γραμμής</strong>.';
     }
 
     function answerContinuousOperation() {
@@ -3886,6 +3917,9 @@
             case 'futureScheduleInfo': return answerFutureScheduleInfo();
             case 'frequency': return answerFrequency(userText);
             case 'continuousOperation': return answerContinuousOperation();
+            case 'bridgeInfo': return answerBridgeInfo();
+            case 'specialFareEligibility': return answerSpecialFareEligibility();
+            case 'petsOnBoard': return answerPetsOnBoard();
             case 'assignedVesselUnavailable': return answerAssignedVesselUnavailable();
             case 'specialVehicles': return answerSpecialVehicles();
             case 'next': return answerNext(port, userText);
@@ -4047,7 +4081,7 @@
         const body = document.getElementById('aiChatBody');
         if (body) {
             body.innerHTML =
-            '<div class="ai-msg bot">Γεια σας! Είμαι ο Rio-Antirrio Ai Assistant. Πώς μπορώ να σας βοηθήσω σχετικά με το πορθμείο;</div>';
+                '<div class="ai-msg bot">Είμαι ο Rio Ai Assistant. Πώς μπορώ να σας βοηθήσω σχετικά με το πορθμείο;;</div>';
         }
 
         const input = document.getElementById('aiInput');

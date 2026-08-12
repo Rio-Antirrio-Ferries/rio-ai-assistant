@@ -652,21 +652,25 @@
                 'συγκριση με τη γεφυρα',
                 'συγκριση με τα διοδια',
                 'περνανε οχηματα στη γεφυρα',
+                'τιμες διοδιων', 'τιμη διοδιων', 'ποσο ειναι τα διοδια',
+                'ποσο κοστιζουν τα διοδια', 'κοστος διοδιων', 'διοδια γεφυρας',
                 'gefura riou antirriou',
                 'poso exoun ta diodia',
                 'timi diodion sti gefura',
                 'sta diodia tis gefuras poso kanei',
                 'sigrisi me ti gefura',
                 'sigrisi me ta diodia',
-                'pernane oximata sti gefura'
+                'pernane oximata sti gefura',
+                'times diodion', 'timi diodion', 'posa einai ta diodia',
+                'poso kostizoun ta diodia', 'kostos diodion', 'diodia gefuras'
             ],
             keywords: [
                 'γεφυρα', 'διοδια',
-                'gefura', 'gefyra', 'diodia'
+                'gefura', 'gefyra', 'diodia', 'diodion'
             ],
             requiredAny: [
                 'γεφυρα', 'διοδια',
-                'gefura', 'gefyra', 'diodia'
+                'gefura', 'gefyra', 'diodia', 'diodion'
             ]
         },
 
@@ -674,22 +678,53 @@
         specialFareEligibility: {
             priority: 119,
             phrases: [
-                'η καρτα πολυτεκνου ισχυει',
-                'ισχυει πολυτεκνικο',
-                'ισχυει αμεα',
-                'δικαιολογητικα πολυτεκνων',
-                'δικαιολογητικα αμεα',
-                'οι τριτεκνοι ειναι πολυτεκνοι',
-                'i karta politeknou isxuei',
-                'isxuei politekniko',
-                'isxuei amea',
-                'dikaiologitika politeknon',
-                'dikaiologitika amea',
-                'oi triteknoi einai politeknioi'
+                'η καρτα πολυτεκνου ισχυει', 'ισχυει η καρτα πολυτεκνου', 'ισχυει πολυτεκνικο',
+                'ισχυει αμεα', 'δικαιολογητικα πολυτεκνων', 'δικαιολογητικα αμεα',
+                'οι τριτεκνοι ειναι πολυτεκνοι', 'οι πολυτεκνοι εχουν εκπτωση', 'εχουν εκπτωση οι πολυτεκνοι',
+                'τα αμεα εχουν εκπτωση', 'εχουν εκπτωση τα αμεα', 'υπαρχει εκπτωση για πολυτεκνους',
+                'υπαρχει εκπτωση για αμεα', 'δικαιουνται εκπτωση οι πολυτεκνοι', 'δικαιουνται εκπτωση τα αμεα',
+                'οι πολυτεκνοι δικαιουνται μειωμενο ναυλο', 'τα αμεα δικαιουνται μειωμενο ναυλο', 'μειωμενο ναυλο πολυτεκνων',
+                'μειωμενο ναυλο αμεα', 'μειωμενη τιμη πολυτεκνων', 'μειωμενη τιμη αμεα',
+                'τα αμεα ποσο πληρωνουν', 'ποσο πληρωνουν τα αμεα', 'ποσο πληρωνει αμεα',
+                'ποσο πληρωνει το αμεα', 'τιμη αμεα', 'ποσο κοστιζει για αμεα',
+                'οι πολυτεκνοι ποσο πληρωνουν', 'ποσο πληρωνουν οι πολυτεκνοι', 'ποσο πληρωνει ο πολυτεκνος',
+                'ποσο πληρωνει το πολυτεκνικο', 'τιμη πολυτεκνου', 'τιμη πολυτεκνικου',
+                'ποσο κοστιζει το πολυτεκνικο', 'τι δικαιολογητικα θελουν οι πολυτεκνοι', 'τι δικαιολογητικα χρειαζονται οι πολυτεκνοι',
+                'τι δικαιολογητικα θελει το πολυτεκνικο', 'τι δικαιολογητικα θελουν τα αμεα', 'τι δικαιολογητικα χρειαζονται τα αμεα',
+                'τι δικαιολογητικα θελει το αμεα', 'χρειαζεται καρτα πολυτεκνου', 'χρειαζεται δικαιολογητικο αμεα',
+                'τι χρειαζεται για μειωμενο ναυλο', 'ποιες ειναι οι προυποθεσεις για μειωμενο ναυλο', 'ποιοι δικαιουνται μειωμενο ναυλο',
+                'οι τριτεκνοι εχουν εκπτωση', 'εχουν εκπτωση οι τριτεκνοι', 'οι τριτεκνοι δικαιουνται εκπτωση',
+                'οι τριτεκνοι δικαιουνται μειωμενο ναυλο', 'ισχυει εκπτωση για τριτεκνους', 'υπαρχει εκπτωση για τριτεκνους',
+                'ισχυει τριτεκνικο', 'ισχυει η καρτα τριτεκνου', 'η καρτα τριτεκνου ισχυει',
+                'δικαιολογητικα τριτεκνων', 'τι δικαιολογητικα θελουν οι τριτεκνοι', 'τι δικαιολογητικα χρειαζονται οι τριτεκνοι',
+                'οι τριτεκνοι ποσο πληρωνουν', 'ποσο πληρωνουν οι τριτεκνοι', 'ποσο πληρωνει ο τριτεκνος',
+                'ποσο πληρωνει το τριτεκνικο', 'τιμη τριτεκνου', 'τιμη τριτεκνικου',
+                'μειωμενο ναυλο τριτεκνων', 'i karta politeknou isxuei', 'isxuei i karta politeknou',
+                'isxuei politekniko', 'isxuei amea', 'dikaiologitika politeknon',
+                'dikaiologitika amea', 'oi triteknoi einai politeknioi', 'oi politeknoi exoun ekptosi',
+                'exoun ekptosi oi politeknoi', 'ta amea exoun ekptosi', 'exoun ekptosi ta amea',
+                'yparxei ekptosi gia politeknous', 'yparxei ekptosi gia amea', 'dikaiountai ekptosi oi politeknoi',
+                'dikaiountai ekptosi ta amea', 'oi politeknoi dikaiountai meiomeno naulo', 'ta amea dikaiountai meiomeno naulo',
+                'meiomeno naulo politeknon', 'meiomeno naulo amea', 'meiomeni timi politeknon',
+                'meiomeni timi amea', 'ta amea poso plironoun', 'poso plironoun ta amea',
+                'poso plironei amea', 'poso plironei to amea', 'timi amea',
+                'poso kostizei gia amea', 'oi politeknoi poso plironoun', 'poso plironoun oi politeknoi',
+                'poso plironei o politeknos', 'poso plironei to politekniko', 'timi politeknou',
+                'timi politeknikou', 'poso kostizei to politekniko', 'ti dikaiologitika theloun oi politeknoi',
+                'ti dikaiologitika xreiazontai oi politeknoi', 'ti dikaiologitika thelei to politekniko', 'ti dikaiologitika theloun ta amea',
+                'ti dikaiologitika xreiazontai ta amea', 'ti dikaiologitika thelei to amea', 'xreiazetai karta politeknou',
+                'xreiazetai dikaiologitiko amea', 'ti xreiazetai gia meiomeno naulo', 'poies einai oi proypotheseis gia meiomeno naulo',
+                'poioi dikaiountai meiomeno naulo', 'oi triteknoi exoun ekptosi', 'exoun ekptosi oi triteknoi',
+                'oi triteknoi dikaiountai ekptosi', 'oi triteknoi dikaiountai meiomeno naulo', 'isxyei ekptosi gia triteknous',
+                'yparxei ekptosi gia triteknous', 'isxyei tritekniko', 'isxyei i karta triteknou',
+                'i karta triteknou isxyei', 'dikaiologitika triteknon', 'ti dikaiologitika theloun oi triteknoi',
+                'ti dikaiologitika xreiazontai oi triteknoi', 'oi triteknoi poso plironoun', 'poso plironoun oi triteknoi',
+                'poso plironei o triteknos', 'poso plironei to tritekniko', 'timi triteknou',
+                'timi triteknikou', 'meiomeno naulo triteknon'
             ],
             keywords: [
-                'πολυτεκν', 'αμεα', 'τριτεκν',
-                'politekn', 'polytekn', 'amea', 'tritekn'
+                'πολυτεκν', 'αμεα', 'τριτεκν', 'μειωμεν', 'εκπτωση', 'δικαιολογητικ',
+                'politekn', 'polytekn', 'amea', 'tritekn', 'meiomen', 'ekptosi', 'dikaiolog'
             ],
             requiredAny: [
                 'πολυτεκν', 'αμεα', 'τριτεκν',
@@ -792,12 +827,12 @@
         capabilities: {
             priority: 60,
             phrases: [
-                'τι ξερεισ',
+                'τι ξερεισ', 'ποσα ξερεισ',
                 'τι μπορεισ να κανεισ',
                 'τι μπορω να σε ρωτησω',
                 'τι απαντασ',
                 'βοηθεια',
-                'ti ksereis',
+                'ti ksereis', 'posa xereis', 'posa ksereis',
                 'ti mporeis na kaneis',
                 'ti mporo na se rotiso',
                 'ti apantas',

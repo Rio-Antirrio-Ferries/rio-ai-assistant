@@ -21,7 +21,8 @@
             mapsAnt: 'https://maps.app.goo.gl/M6w61ZGt881daB7VA',
             mapsPage: 'https://rio-antirrio.blogspot.com/2014/09/xartes-chart-maps.html',
             meteoRioLive: 'https://penteli.meteo.gr/stations/rio/',
-            shipsDetails: 'https://rio-antirrio.blogspot.com/2014/09/ships-details.html'
+            shipsDetails: 'https://rio-antirrio.blogspot.com/2014/09/ships-details.html',
+            assistantAbout: 'https://rio-antirrio.blogspot.com/p/rio-ai-assistant.html'
         }
     };
 
@@ -500,8 +501,8 @@
                     /^(?:τι|ti)\s+(?:μπορει|mporei)\s+(?:να\s+|na\s+)?(?:κανει|kanei)\s+(?:(?:ο|o)\s+)?(?:assistant|βοηθος|voithos)$/,
                     /^(?:τι|ti)\s+(?:ερωτησεις|erotiseis)\s+(?:απαντας|apantas)$/,
                     /^(?:για\s+τι\s+πραγματα|gia\s+ti\s+pragmata)\s+(?:μπορω|mporo)\s+(?:να\s+|na\s+)?(?:σε\s+|se\s+)(?:ρωτησω|rotiso)$/,
-                    /^(?:τι|ti)\s+(?:ξερεις|xereis|ksereis|γνωριζεις|gnorizeis)\s+(?:για|gia)\s+(?:(?:τη|την|ti|tin)\s+)?(?:γραμμη|grammi)$/,
-                    /^(?:τι|ti)\s+(?:ξερεις|xereis|ksereis|γνωριζεις|gnorizeis)\s+(?:για|gia)\s+(?:το|to)\s+(?:ριο\s+αντιρριο|rio\s+antirrio)$/
+                    /^(?:τι|ti)\s+(?:ξερεις|ξερεισ|xereis|ksereis|γνωριζεις|γνωριζεισ|gnorizeis)\s+(?:για|gia)\s+(?:(?:τη|την|ti|tin)\s+)?(?:γραμμη|grammi)$/,
+                    /^(?:τι|ti)\s+(?:ξερεις|ξερεισ|xereis|ksereis|γνωριζεις|γνωριζεισ|gnorizeis)\s+(?:για|gia)\s+(?:το|to)\s+(?:ριο\s+αντιρριο|rio\s+antirrio)$/
                 ]
             },
             {
@@ -1035,7 +1036,7 @@
         /* Δυνατότητες / βοήθεια — μία καθαρή κατηγορία. */
         if (
             /^(?:βοηθεια|help|voitheia)$/.test(raw) ||
-            /^(?:τι|ti|ποσα|posa)\s+(?:ξερεις|xereis|ksereis|γνωριζεις|gnorizeis)$/.test(raw) ||
+            /^(?:τι|ti|ποσα|posa)\s+(?:ξερεις|ξερεισ|xereis|ksereis|γνωριζεις|γνωριζεισ|gnorizeis)$/.test(raw) ||
             /^(?:τι|ti)\s+(?:μπορεις|mporeis)\s+(?:να\s+|na\s+)?(?:κανεις|kaneis|απαντησεις|apantiseis)$/.test(raw) ||
             /^(?:τι|ti)\s+(?:μπορω|mporo)\s+(?:να\s+|na\s+)?(?:ρωτησω|rotiso)$/.test(raw) ||
             /^(?:τι|ti)\s+(?:ερωτησεις|erotiseis)\s+(?:μπορω|mporo)\s+(?:να\s+|na\s+)?(?:κανω|kano)$/.test(raw) ||
@@ -1052,8 +1053,8 @@
             /^(?:τι|ti)\s+(?:μπορει|mporei)\s+(?:να\s+|na\s+)?(?:κανει|kanei)\s+(?:(?:ο|o)\s+)?(?:assistant|βοηθος|voithos)$/.test(raw) ||
             /^(?:τι|ti)\s+(?:ερωτησεις|erotiseis)\s+(?:απαντας|apantas)$/.test(raw) ||
             /^(?:για\s+τι\s+πραγματα|gia\s+ti\s+pragmata)\s+(?:μπορω|mporo)\s+(?:να\s+|na\s+)?(?:σε\s+|se\s+)(?:ρωτησω|rotiso)$/.test(raw) ||
-            /^(?:τι|ti)\s+(?:ξερεις|xereis|ksereis|γνωριζεις|gnorizeis)\s+(?:για|gia)\s+(?:(?:τη|την|ti|tin)\s+)?(?:γραμμη|grammi)$/.test(raw) ||
-            /^(?:τι|ti)\s+(?:ξερεις|xereis|ksereis|γνωριζεις|gnorizeis)\s+(?:για|gia)\s+(?:το|to)\s+(?:ριο\s+αντιρριο|rio\s+antirrio)$/.test(raw)
+            /^(?:τι|ti)\s+(?:ξερεις|ξερεισ|xereis|ksereis|γνωριζεις|γνωριζεισ|gnorizeis)\s+(?:για|gia)\s+(?:(?:τη|την|ti|tin)\s+)?(?:γραμμη|grammi)$/.test(raw) ||
+            /^(?:τι|ti)\s+(?:ξερεις|ξερεισ|xereis|ksereis|γνωριζεις|γνωριζεισ|gnorizeis)\s+(?:για|gia)\s+(?:το|to)\s+(?:ριο\s+αντιρριο|rio\s+antirrio)$/.test(raw)
         ) return 'assistantCapabilities';
 
         /* Ταυτότητα / υπηρεσία / δημιουργία / ιδιοκτησία. */
@@ -1077,10 +1078,14 @@
         if (/^(?:καθε\s+ποτε|kathe\s+pote)\s+(?:περναει|φευγει|εχει|pernaei|feugei|exei)\s+(?:(?:το|to)\s+)?(?:καραβι|πλοιο|karavi|ploio)$/.test(raw) || /^(?:πρωινα|απογευματινα|βραδινα|νυχτερινα|proina|apogeumatina|vradina|nyxterina)\s+(?:δρομολογια|dromologia)$/.test(raw) || /^(?:δρομολογια|dromologia)\s+(?:το\s+|τη\s+|ti\s+)?(?:πρωι|απογευμα|βραδυ|νυχτα|proi|apogeuma|vradi|nyxta)$/.test(raw)) return 'frequency';
         if (/^(?:πως|πωσ|pos)\s+(?:παω|pao)\s+(?:στο|sto)\s+(?:καραβι|πλοιο|karavi|ploio)$/.test(raw) || /^(?:ποσο|poso)\s+(?:θελω|thelo)(?:\s+(?:χρονο|xrono))?\s+(?:για|μεχρι|gia|mexri)\s+(?:την|τη|tin|ti)\s+(?:προβλητα|provlita)$/.test(raw) || /^(?:ποσο|poso)\s+(?:απεχω|apexo)\s+(?:απο|apo)\s+(?:την|τη|tin|ti)\s+(?:προβλητα|provlita)$/.test(raw)) return 'distanceGps';
         if (/(?:απο\s+)?(?:ποια|poia)\s+(?:προβλητα|provlita).*?(?:φευγει|αναχωρει|feugei|anaxorei).*?(?:καραβι|πλοιο|karavi|ploio)/.test(raw) || /(?:καραβι|πλοιο|karavi|ploio).*?(?:απο\s+)?(?:ποια|poia)\s+(?:προβλητα|provlita).*?(?:φευγει|αναχωρει|feugei|anaxorei)/.test(raw) || /(?:σε\s+ποια|se\s+poia)\s+(?:προβλητα|provlita)\s+(?:ειναι|einai)\s+(?:(?:το|to)\s+)?(?:καραβι|πλοιο|karavi|ploio)/.test(raw)) return 'departurePoint';
+        /* Σκέτο «φεύγει καράβι/πλοίο από Ρίο/Αντίρριο;» = λειτουργία γραμμής, όχι ώρα αναχώρησης. */
+        if (/^(?:φευγει|feugei)\s+(?:(?:το|to)\s+)?(?:καραβι|πλοιο|karavi|ploio)\s+(?:απο|apo)\s+(?:(?:το|to)\s+)?(?:ριο|αντιρριο|rio|antirrio|antirio|antiriro)$/.test(raw) || /^(?:φευγουν|feugoun)\s+(?:καραβια|πλοια|karavia|ploia)\s+(?:απο|apo)\s+(?:(?:το|to)\s+)?(?:ριο|αντιρριο|rio|antirrio|antirio|antiriro)$/.test(raw)) return 'status';
         if (/(?:μηχανη|μηχανακι|μηχανακια|μοτο|mixani|mixanaki|mixanakia|moto|motor|scooter|παπι|papi)/.test(raw) && /(?:ποσο|ποσα|poso|posa|πληρωνει|πληρωνω|plironei|plirono|κανει|kanei|κοστιζει|kostizei|τιμη|timi|ναυλο|navlo)/.test(raw)) return 'prices';
-        if (/(?:πεζοι|πεζος|πεζο|pezoi|pezos)/.test(raw) && /(?:πληρων|κοστι|τιμη|ναυλο|δωρεαν|pliron|kost|timi|navlo|dorean)/.test(raw)) return 'passengerFare';
-        if (/(?:γεφυρα|gefura|gefyra|διοδια|diodia)/.test(raw) && /(?:ριο|αντιρριο|rio|antirrio|γεφυρα|gefura|gefyra|διοδια|diodia|τιμη|ποσο|οχημα|αμαξι|αυτοκινητο|μηχανακι|εκπτωτικ|sigrisi|συγκριση)/.test(raw)) return 'bridgeInfo';
-        if (/(?:πολυτεκν|politekn|polytekn|αμεα|amea|τριτεκν|tritekn)/.test(raw) && /(?:καρτα|δικαιολογητικ|ισχυ|εκπτωση|μειωμεν|ναυλο|οχημα|karta|dikaiolog|isxy|isxi|ekptosi|meiomen|navlo|oxima)/.test(raw)) return 'specialFareEligibility';
+        /* «χωρίς αμάξι/όχημα» σημαίνει πεζός επιβάτης και υπερισχύει της λέξης αμάξι. */
+        if (/(?:χωρισ|xoris)\s+(?:(?:απο|apo)\s+)?(?:αμαξι|αυτοκινητο|οχημα|amaksi|amaxi|autokinito|aftokinito|oxima)/.test(raw) && /(?:επιβατ|epivat|ποσο|poso|πληρων|pliron|κοστι|kost|τιμη|timi|ναυλο|navlo|δωρεαν|dorean)/.test(raw)) return 'passengerFare';
+        if (/(?:πεζοι|πεζος|πεζο|επιβατες|επιβατης|pezoi|pezos|epivates|epivatis)/.test(raw) && /(?:πληρων|κοστι|τιμη|ναυλο|δωρεαν|pliron|kost|timi|navlo|dorean)/.test(raw)) return 'passengerFare';
+        if (/(?:γεφυρα|gefura|gefyra|διοδια|diodia|diodion)/.test(raw) && /(?:ριο|αντιρριο|rio|antirrio|γεφυρα|gefura|gefyra|διοδια|diodia|diodion|τιμη|τιμες|timi|times|ποσο|poso|κοστος|kostos|οχημα|αμαξι|αυτοκινητο|μηχανακι|εκπτωτικ|sigrisi|συγκριση)/.test(raw)) return 'bridgeInfo';
+        if (/(?:πολυτεκν|politekn|polytekn|αμεα|amea|τριτεκν|tritekn)/.test(raw) && /(?:καρτα|δικαιολογητικ|ισχυ|εκπτωση|μειωμεν|ναυλο|οχημα|τιμη|ποσο|πληρων|κοστι|δικαιου|προυποθε|karta|dikaiolog|isxy|isxi|isx|ekptosi|meiomen|navlo|oxima|timi|poso|pliron|kost|dikaiou|proypoth)/.test(raw)) return 'specialFareEligibility';
         if (/(?:κατοικιδ|σκυλ|γατ|μελωδικ.*πτην|οικοσιτ|παραγωγικ.*ζω|κοτ|προβατ|κατσικ|αλογ|katoikid|skyl|gat|melodik.*ptin|oikosit|paragogik.*zo|kot|provat|katsik|alog)/.test(raw) && /(?:καραβι|πλοιο|επιτρεπ|μεταφερ|παρω|φερω|περασω|karavi|ploio|epitrep|metafer|paro|fero|peraso)/.test(raw)) return 'petsOnBoard';
         if (/^(?:ποσα|ποια|ποιο|posa|poia|poio)\s+(?:πλοια|καραβια|πλοιο|καραβι|ploia|karavia|ploio|karavi).*?(?:δουλευουν|δουλευει|λειτουργουν|λειτουργει|εκτελουν|εκτελει|ειναι\s+σε\s+υπηρεσια|εχει\s+βαρδια|doulevoun|doulevei|leitourgoun|leitourgei|ekteloun|ektelei|einai\s+se\s+ypiresia|exei\s+vardia).*?(?:τωρα|tora)$/.test(raw)) return 'assignedVesselUnavailable';
 
@@ -1930,6 +1935,14 @@
             /(?:ιχ|ι\.χ\.|ix)\s+(?:με|me)\s+(?:τρεϊλερ|τρειλερ|trailer)/.test(combined)
         ) {
             return 'specialVehicles';
+        }
+
+        /* Επιβάτης χωρίς όχημα — προστασία πριν από τη γενική τιμή Ι.Χ. */
+        if (
+            /(?:χωρισ|xoris)\s+(?:(?:απο|apo)\s+)?(?:αμαξι|αυτοκινητο|οχημα|amaksi|amaxi|autokinito|aftokinito|oxima)/.test(combined) &&
+            /(?:επιβατ|epivat|ποσο|poso|πληρων|pliron|κοστι|kost|τιμη|timi|ναυλο|navlo|δωρεαν|dorean)/.test(combined)
+        ) {
+            return 'passengerFare';
         }
 
         /* Σαφής τιμή Ι.Χ. */
@@ -3497,7 +3510,8 @@
     function answerAssistantAbout() {
         return '<strong>Σχετικά με την υπηρεσία</strong><br><br>' +
             'Η σελίδα <strong>Rio-Antirrio Ferries</strong>, η εφαρμογή <strong>Rio-Antirrio Live</strong> και ο ψηφιακός βοηθός <strong>Rio Ai Assistant</strong> αποτελούν <strong>ιδιωτική πρωτοβουλία ενημέρωσης του επιβατικού κοινού</strong> για το πορθμείο Ρίου–Αντιρρίου, <strong>χωρίς οποιουδήποτε είδους υποστήριξη, δέσμευση ή επίσημη σύνδεση με δημόσιο ή ιδιωτικό φορέα</strong>.<br><br>' +
-            'Η λειτουργία τους έχει <strong>αποκλειστικά ενημερωτικό χαρακτήρα και δεν αποσκοπεί στην αποκόμιση οποιουδήποτε οικονομικού οφέλους</strong>.<br><br>' +
+            'Η λειτουργία τους έχει <strong>αποκλειστικά ενημερωτικό χαρακτήρα και δεν αποσκοπεί στην αποκόμιση οποιουδήποτε οικονομικού οφέλους από τους χρήστες</strong>.<br><br>' +
+            'Γνώρισε το 🔗 <a href="' + CONFIG.links.assistantAbout + '" target="_blank" rel="noopener noreferrer"><strong>Rio Ai Assistant</strong></a><br><br>' +
             'Η υπηρεσία <strong>δεν αποτελεί επίσημη υπηρεσία των Λιμενικών Αρχών, ούτε εργαλείο ενημέρωσης ή εκπροσώπησης των πλοιοκτητριών εταιρειών</strong> που δραστηριοποιούνται στη γραμμή.<br><br>' +
             'Οι πληροφορίες παρέχονται για τη διευκόλυνση και ενημέρωση των επιβατών και <strong>δεν υποκαθιστούν την επίσημη ενημέρωση των αρμόδιων Λιμενικών Αρχών</strong>.<br><br>' +
             'Για επιβεβαίωση πληροφοριών σχετικά με τη λειτουργία της γραμμής ή έκτακτες μεταβολές, μπορείτε να επικοινωνείτε με το <strong>Λιμενικό Τμήμα Ρίου</strong>.<br><br>' +
@@ -3575,10 +3589,21 @@
     }
 
     function answerSpecialFareEligibility() {
-        return '<strong>Ειδικές κατηγορίες μειωμένου ναύλου</strong><br><br>' +
-            'Ο μειωμένος ναύλος ειδικής κατηγορίας αφορά το <strong>όχημα</strong> και όχι τον επιβάτη, καθώς οι πεζοί επιβάτες μεταφέρονται δωρεάν.<br><br>' +
-            'Στον διαθέσιμο τιμοκατάλογο προβλέπεται ειδική κατηγορία για <strong>πολυτεκνικό όχημα και ΑμεΑ</strong>. Οι τρίτεκνοι δεν αναγνωρίζονται ως πολύτεκνοι για τη συγκεκριμένη κατηγορία.<br><br>' +
-            'Για έλεγχο και αποδοχή των δικαιολογητικών ειδικής κατηγορίας και την τελική εφαρμογή του μειωμένου ναύλου στο όχημά σας, επικοινωνήστε με το <strong>Λιμενικό Τμήμα Ρίου</strong> ή με αρμόδιο μέλος του πληρώματος πριν από την επιβίβαση.<br><br>' + centeredPhoneHtml();
+        const reducedFarePrice = findPriceByTerms([
+            'πολυτεκνικο αμεα',
+            'πολυτεκνικο - αμεα',
+            'πολυτεκνικο',
+            'αμεα'
+        ]);
+
+        return '<strong>♿ Πολύτεκνοι / ΑμεΑ — Μειωμένο ναύλο</strong><br><br>' +
+            'Οχήματα <strong>πολυτέκνων και ΑμεΑ</strong> δικαιούνται μειωμένο ναύλο υπό προϋποθέσεις, για τις οποίες μπορείτε να ενημερωθείτε είτε από τις <strong>Λιμενικές Αρχές</strong> είτε από <strong>αρμόδιο μέλος του πληρώματος</strong> πριν από την επιβίβασή σας. Η μειωμένη τιμή αφορά το <strong>όχημα</strong>, καθώς οι επιβάτες μεταφέρονται δωρεάν.<br><br>' +
+            'Για την εφαρμογή του μειωμένου ναύλου μπορεί να ζητηθούν δικαιολογητικά που αποδεικνύουν ότι το όχημα ανήκει στη συγκεκριμένη κατηγορία.<br><br>' +
+            'Σύμφωνα με την ισχύουσα νομοθεσία, οι <strong>τρίτεκνοι δεν υπάγονται στην κατηγορία των πολυτέκνων</strong>.<br><br>' +
+            '<strong>Τρέχουσα τιμή μειωμένου ναύλου:</strong><br><br>' +
+            (reducedFarePrice
+                ? '♿ <strong>Πολυτεκνικό / ΑμεΑ: ' + escapeHtml(reducedFarePrice) + '</strong>'
+                : '♿ <strong>Πολυτεκνικό / ΑμεΑ:</strong> Η τρέχουσα τιμή δεν είναι διαθέσιμη αυτή τη στιγμή.');
     }
 
     function answerPetsOnBoard() {

@@ -1,8 +1,7 @@
 /*
  * Rio-Antirrio AI Assistant — Knowledge Catalogue
  * Extracted from v1.0.0 FINAL MASTER.
- * v1.0.0 — safe phrase enrichment / routing catalogue update.
- * Existing logic and version remain unchanged.
+ * FINAL MASTER remains unchanged.
  */
 (function (global) {
     'use strict';
@@ -103,16 +102,22 @@
                 'το καραβι απο ποια προβλητα φευγει',
                 'το πλοιο απο ποια προβλητα φευγει',
                 'to karavi apo poia provlita feugei',
-                'απο που παιρνω το καραβι', 'απο που φευγουν τα καραβια',
-                'που ειναι η προβλητα', 'που πρεπει να παω για το καραβι',
-                'απο ποια πλευρα φευγει το καραβι', 'σε ποια πλευρα ειναι τα καραβια',
-                'δουλευουν ανατολικα η δυτικα', 'δειξε μου τη θεση των πλοιων',
-                'δειξε μου την κινηση των πλοιων',
-                'apo pou pairno to karavi', 'apo pou fevgoun ta karavia',
-                'pou einai i provlita', 'pou prepei na pao gia to karavi',
-                'apo poia plevra fevgei to karavi', 'se poia plevra einai ta karavia',
-                'doulevoun anatolika i dytika', 'deikse mou ti thesi ton ploion',
-                'deikse mou tin kinisi ton ploion'
+                'απο που παιρνω το καραβι', 'απο που παιρνω το πλοιο',
+                'που παιρνω το καραβι', 'που παιρνω το πλοιο',
+                'που ειναι η προβλητα', 'που ειναι τα καραβια',
+                'που πρεπει να παω για το καραβι',
+                'απο ποια πλευρα φευγει το καραβι',
+                'σε ποια πλευρα ειναι τα καραβια',
+                'δειξε μου τη θεση των πλοιων', 'δειξε μου την κινηση των πλοιων',
+                'apo pou pairno to karavi', 'apo pou pairno to ploio',
+                'apo pou perno to karavi', 'apo pou perno to ploio',
+                'apo pou painrno to karavi', 'apo pou painrno to ploio',
+                'pou pairno to karavi', 'pou pairno to ploio',
+                'pou einai i provlita', 'pou einai ta karavia',
+                'pou prepei na pao gia to karavi',
+                'apo poia plevra feugei to karavi',
+                'se poia plevra einai ta karavia',
+                'deikse mou ti thesi ton ploion', 'deikse mou tin kinisi ton ploion'
             ],
             keywords: [
                 'θεση', 'πλοιων', 'πλοια', 'χαρτησ', 'χαρτη',
@@ -334,9 +339,11 @@
                 'pou vgazo eisitirio', 'pos vgazo eisitirio',
                 'xreiazetai kratisi', 'kano kratisi',
                 'πρεπει να κλεισω θεση', 'κλεινω εισιτηριο απο πριν',
-                'εχει online κρατηση', 'μπορω να κανω κρατηση online',
+                'βγαζω εισιτηριο απο πριν', 'υπαρχει online κρατηση',
+                'μπορω να κανω κρατηση online', 'χρειαζεται να κλεισω εισιτηριο',
                 'prepei na kleiso thesi', 'kleino eisitirio apo prin',
-                'exei online kratisi', 'mporo na kano kratisi online'
+                'vgazo eisitirio apo prin', 'yparxei online kratisi',
+                'mporo na kano kratisi online', 'xreiazetai na kleiso eisitirio'
             ],
             keywords: [
                 'πληρωμη', 'πληρωνω', 'καρτα', 'μετρητα',
@@ -414,12 +421,21 @@
                 'pos vazo tin efarmogi', 'pos egkathisto',
                 'prosthiki stin arxiki othoni',
                 'vale tin efarmogi sto kinito',
-                'πως κατεβαζω την εφαρμογη', 'πως βαζω το rio antirrio live στο κινητο',
-                'θελω να βαλω το app στο κινητο', 'πως το βαζω στην αρχικη οθονη',
-                'πως κανω install', 'μπορω να το εγκαταστησω σαν app',
-                'pos katevazo tin efarmogi', 'pos vazo to rio antirrio live sto kinito',
-                'thelo na valo to app sto kinito', 'pos to vazo stin arxiki othoni',
-                'pos kano install', 'mporo na to egkatastiso san app'
+                'πως κατεβαζω την εφαρμογη',
+                'πως βαζω το rio antirrio live στο κινητο',
+                'θελω να βαλω το app στο κινητο',
+                'πως το βαζω στην αρχικη οθονη',
+                'πως κανω εγκατασταση',
+                'πως βαζω εικονιδιο στην αρχικη',
+                'μπορω να το εγκαταστησω σαν εφαρμογη',
+                'pos katevazo tin efarmogi',
+                'pos vazo to rio antirrio live sto kinito',
+                'thelo na valo to app sto kinito',
+                'pos to vazo stin arxiki othoni',
+                'pos kano egkatastasi', 'pos kano install',
+                'pos vazo eikonidio stin arxiki',
+                'mporo na to egkatastiso san efarmogi',
+                'mporo na to egkatastiso san app'
             ],
             keywords: [
                 'εγκατασταση', 'εφαρμογη', 'εγκαθιστω',
@@ -460,15 +476,7 @@
                 'dromologia to proi',
                 'dromologia to apogeuma',
                 'dromologia to vradi',
-                'dromologia ti nyxta',
-                'ποιο ειναι το πρωτο δρομολογιο', 'ποιο ειναι το τελευταιο δρομολογιο',
-                'ποιο ειναι το πρωτο απο ριο', 'ποιο ειναι το πρωτο απο αντιρριο',
-                'ποιο ειναι το τελευταιο απο ριο', 'ποιο ειναι το τελευταιο απο αντιρριο',
-                'τι ωρα ξεκινανε τα καραβια', 'μεχρι τι ωρα εχει καραβια',
-                'poio einai to proto dromologio', 'poio einai to teleutaio dromologio',
-                'poio einai to proto apo rio', 'poio einai to proto apo antirrio',
-                'poio einai to teleutaio apo rio', 'poio einai to teleutaio apo antirrio',
-                'ti ora ksekinane ta karavia', 'mexri ti ora exei karavia'
+                'dromologia ti nyxta'
             ],
             keywords: [
                 'συχνοτητα', 'συχνα', 'καθε', 'ανα',
@@ -501,7 +509,19 @@
                 'stamataei i grammi',
                 'pote stamataei i grammi',
                 'ti ora stamataei i grammi',
-                'pote stamatoun ta dromologia'
+                'pote stamatoun ta dromologia',
+                'ποιο ειναι το πρωτο δρομολογιο', 'το πρωτο δρομολογιο',
+                'τι ωρα ειναι το πρωτο καραβι', 'τι ωρα ξεκινανε τα καραβια',
+                'ποιο ειναι το πρωτο απο ριο', 'ποιο ειναι το πρωτο απο αντιρριο',
+                'ποιο ειναι το τελευταιο δρομολογιο', 'το τελευταιο δρομολογιο',
+                'τι ωρα ειναι το τελευταιο καραβι', 'μεχρι τι ωρα εχει καραβια',
+                'ποιο ειναι το τελευταιο απο ριο', 'ποιο ειναι το τελευταιο απο αντιρριο',
+                'poio einai to proto dromologio', 'to proto dromologio',
+                'ti ora einai to proto karavi', 'ti ora ksekinane ta karavia',
+                'poio einai to proto apo rio', 'poio einai to proto apo antirrio',
+                'poio einai to teleutaio dromologio', 'to teleutaio dromologio',
+                'ti ora einai to teleutaio karavi', 'mexri ti ora exei karavia',
+                'poio einai to teleutaio apo rio', 'poio einai to teleutaio apo antirrio'
             ],
             keywords: [
                 '24ωρη', '24ωρο', 'ολο', 'βραδυ',
@@ -603,7 +623,17 @@
                 'poia karavia doulevoun tora',
                 'poia ploia doulevoun tora',
                 'poio karavi exei vardia tora',
-                'poio ploio exei vardia tora'
+                'poio ploio exei vardia tora',
+                'ποια πλοια ειναι σε λειτουργια', 'ποια καραβια ειναι σε λειτουργια',
+                'ποια πλοια δουλευουν', 'ποια καραβια δουλευουν',
+                'ποσα πλοια ειναι σε λειτουργια', 'ποσα καραβια ειναι σε λειτουργια',
+                'ποσα πλοια δουλευουν', 'ποσα καραβια δουλευουν',
+                'ποια πλοια ειναι σε υπηρεσια', 'ποια καραβια ειναι σε υπηρεσια',
+                'poia ploia einai se leitourgia', 'poia karavia einai se leitourgia',
+                'poia ploia doulevoun', 'poia karavia doulevoun',
+                'posa ploia einai se leitourgia', 'posa karavia einai se leitourgia',
+                'posa ploia doulevoun', 'posa karavia doulevoun',
+                'poia ploia einai se ypiresia', 'poia karavia einai se ypiresia'
             ],
             keywords: [
                 'ποιο', 'ποια', 'ποσα', 'πλοιο', 'καραβι',
@@ -703,7 +733,61 @@
             ]
         },
 
-        /* 23. specialFareEligibility */
+        /* 23. accessibleBoarding */
+        accessibleBoarding: {
+            priority: 121,
+            phrases: [
+                'υπαρχει προσβαση για αμεα', 'εχει προσβαση για αμεα',
+                'μπορουν να επιβιβαστουν αμεα', 'πως επιβιβαζονται τα αμεα',
+                'υπαρχει βοηθεια για αμεα', 'υπαρχει βοηθεια στην επιβιβαση για αμεα',
+                'υπαρχει εξυπηρετηση για αμεα', 'βοηθαει το πληρωμα τα αμεα',
+                'μπορω να μπω με αναπηρικο αμαξιδιο',
+                'πως μπορω να μπω με αναπηρικο αμαξιδιο',
+                'πως μπαινω με αναπηρικο αμαξιδιο',
+                'μπαινει αναπηρικο αμαξιδιο στο καραβι',
+                'χωραει αναπηρικο αμαξιδιο στο καραβι',
+                'υπαρχει προσβαση με αναπηρικο αμαξιδιο',
+                'χρειαζομαι βοηθεια για να μπω στο καραβι',
+                'χρειαζομαι βοηθεια στην επιβιβαση',
+                'ποιον ενημερωνω για βοηθεια στην επιβιβαση',
+                'εχω κινητικο προβλημα μπορω να επιβιβαστω',
+                'εχω μειωμενη κινητικοτητα μπορω να μπω στο καραβι',
+                'εξυπηρετηση ατομων με μειωμενη κινητικοτητα',
+                'αμεα στο καραβι', 'αμεα επιβιβαση', 'αναπηρικο αμαξιδιο στο ferry',
+                'yparxei prosvasi gia amea', 'yparxi prosvasi se amea',
+                'exei prosvasi gia amea', 'mporoun na epivivastoun amea',
+                'pos epivivazontai ta amea', 'yparxei voitheia gia amea',
+                'yparxei voitheia stin epivivasi gia amea',
+                'yparxei eksypiretisi gia amea', 'voithaei to pliroma ta amea',
+                'mporo na mpo me anapiriko amaxidio',
+                'pos mporo na mpo me anapiriko amaxidio',
+                'pos mpeno me anapiriko amaxidio', 'mpaino me anapiriko amaxidio',
+                'mpainei anapiriko amaxidio sto karavi',
+                'xoraei anapiriko amaxidio sto karavi',
+                'yparxei prosvasi me anapiriko amaxidio',
+                'xreiazomai voitheia gia na mpo sto karavi',
+                'xreiazomai voitheia stin epivivasi',
+                'poion enimerono gia voitheia stin epivivasi',
+                'exo kinitiko provlima mporo na epivivasto',
+                'exo meiomeni kinitikotita mporo na mpo sto karavi',
+                'eksypiretisi atomon me meiomeni kinitikotita',
+                'amea sto karavi', 'amea epivivasi', 'anapiriko amaxidio sto ferry'
+            ],
+            keywords: [
+                'προσβαση', 'επιβιβαση', 'βοηθεια', 'εξυπηρετηση',
+                'αναπηρικο', 'αμαξιδιο', 'κινητικοτητα',
+                'prosvasi', 'epivivasi', 'voitheia', 'eksypiretisi',
+                'anapiriko', 'amaxidio', 'kinitikotita'
+            ],
+            requiredAny: [
+                'προσβαση', 'επιβιβαση', 'βοηθεια', 'εξυπηρετηση',
+                'αναπηρικο', 'αμαξιδιο', 'κινητικοτητα',
+                'prosvasi', 'epivivasi', 'voitheia', 'eksypiretisi',
+                'anapiriko', 'amaxidio', 'kinitikotita'
+            ]
+        },
+
+        /* 24. specialFareEligibility */
         specialFareEligibility: {
             priority: 119,
             phrases: [
@@ -830,7 +914,29 @@
             ]
         },
 
-        /* 26. info */
+        /* 26. photos */
+        photos: {
+            priority: 75,
+            phrases: [
+                'παλιες φωτογραφιες', 'ριο καποτε', 'φωτογραφιες αρχειου',
+                'υπαρχουν φωτογραφιες', 'εχετε φωτογραφιες',
+                'θελω να δω φωτογραφιες', 'που εχει φωτογραφιες',
+                'φωτογραφικο αρχειο',
+                'palies fotografies', 'rio kapote', 'fotografies arxeiou',
+                'yparxoun fotografies', 'uparxoun fotografies',
+                'exete fotografies', 'thelo na do fotografies',
+                'pou exei fotografies', 'fotografiko arxeio'
+            ],
+            keywords: [
+                'φωτογραφια', 'φωτογραφιεσ', 'αρχειο', 'καποτε',
+                'fotografia', 'fotografies', 'arxeio', 'kapote'
+            ],
+            requiredAny: [
+                'φωτογραφια', 'φωτογραφιεσ', 'fotografia', 'fotografies'
+            ]
+        },
+
+        /* 27. info */
         info: {
             priority: 45,
             phrases: [
@@ -852,46 +958,7 @@
             ]
         },
 
-        /* 28. accessibleBoarding — exact/constrained accessibility routing */
-        accessibleBoarding: {
-            priority: 119,
-            phrases: [
-                'υπαρχει προσβαση για αμεα', 'εχει προσβαση για αμεα',
-                'μπορουν να επιβιβαστουν αμεα', 'πως επιβιβαζονται τα αμεα',
-                'υπαρχει βοηθεια για αμεα', 'υπαρχει βοηθεια στην επιβιβαση για αμεα',
-                'υπαρχει εξυπηρετηση για αμεα', 'βοηθαει το πληρωμα τα αμεα',
-                'μπορω να μπω με αναπηρικο αμαξιδιο', 'μπαινει αναπηρικο αμαξιδιο στο καραβι',
-                'χωραει αναπηρικο αμαξιδιο στο καραβι', 'υπαρχει προσβαση με αναπηρικο αμαξιδιο',
-                'χρειαζομαι βοηθεια για να μπω στο καραβι', 'χρειαζομαι βοηθεια στην επιβιβαση',
-                'ποιον ενημερωνω για βοηθεια στην επιβιβαση',
-                'εχω κινητικο προβλημα μπορω να επιβιβαστω',
-                'εχω μειωμενη κινητικοτητα μπορω να μπω στο καραβι',
-                'εξυπηρετηση ατομων με μειωμενη κινητικοτητα',
-                'αμεα στο καραβι', 'αμεα επιβιβαση', 'αναπηρικο αμαξιδιο στο ferry',
-                'yparxei prosvasi gia amea', 'exei prosvasi gia amea',
-                'mporoun na epivivastoun amea', 'pos epivivazontai ta amea',
-                'yparxei voitheia gia amea', 'yparxei voitheia stin epivivasi gia amea',
-                'yparxei eksypiretisi gia amea', 'voithaei to pliroma ta amea',
-                'mporo na mpo me anapiriko amaxidio', 'mpainei anapiriko amaxidio sto karavi',
-                'xoraei anapiriko amaxidio sto karavi', 'yparxei prosvasi me anapiriko amaxidio',
-                'xreiazomai voitheia gia na mpo sto karavi', 'xreiazomai voitheia stin epivivasi',
-                'poion enimerono gia voitheia stin epivivasi',
-                'exo kinitiko provlima mporo na epivivasto',
-                'exo meiomeni kinitikotita mporo na mpo sto karavi',
-                'eksypiretisi atomon me meiomeni kinitikotita',
-                'amea sto karavi', 'amea epivivasi', 'anapiriko amaxidio sto ferry'
-            ],
-            keywords: [
-                'προσβαση', 'επιβιβαση', 'αναπηρικο', 'αμαξιδιο', 'μειωμενη κινητικοτητα',
-                'prosvasi', 'epivivasi', 'anapiriko', 'amaxidio', 'meiomeni kinitikotita'
-            ],
-            requiredAny: [
-                'προσβαση', 'επιβιβαση', 'αναπηρικο', 'αμαξιδιο', 'μειωμενη κινητικοτητα',
-                'prosvasi', 'epivivasi', 'anapiriko', 'amaxidio', 'meiomeni kinitikotita'
-            ]
-        },
-
-        /* 27. capabilities */
+        /* 28. capabilities */
         capabilities: {
             priority: 60,
             phrases: [

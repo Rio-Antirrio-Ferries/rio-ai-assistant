@@ -473,7 +473,7 @@
             {
                 name: 'social',
                 patterns: [
-                    /^(?:γεια|γεια σου|γεια σας|χαιρετε|καλημερα|καλησπερα|καληνυχτα|καλο βραδυ|geia|geia sou|geia sas|kalimera|kalispera|kalinixta|kalinuxta|kalo vradi|hello|hi)$/,
+                    /^(?:γεια|γεια σου|γεια σας|χαιρετε|καλημερα|καλησπερα|καληνυχτα|καλο βραδυ|geia|geia sou|geia sas|kalimera|kalispera|kalinixta|kalinuxta|kalo vradi|kalo vardi|hello|hi)$/,
                     /^(?:ευχαριστω|ευχαριστω πολυ|σε ευχαριστω|να εισαι καλα|να ειστε καλα|euxaristo|euxaristo poli|na eisai kala|na eiste kala|thanks|thank you)$/,
                     /^(?:μπορω να ρωτησω|μπορω να ρωτησω κατι|να ρωτησω|να ρωτησω κατι|θελω να ρωτησω κατι|mporo na rotiso|mporo na rotiso kati|na rotiso|na rotiso kati|thelo na rotiso kati)$/,
                     /^(?:τελεια|μπραβο|ενταξει|καταλαβα|σωστα|teleia|bravo|entaxi|katalava|sosta|ok)$/,
@@ -1025,7 +1025,7 @@
     function detectLockedIntent(text, raw, normalized, combined) {
         /* 01. SOCIAL — exact matching μόνο, για μηδενικές συγκρούσεις με operational intents. */
         if (
-            /^(?:γεια|γεια σου|γεια σας|χαιρετε|καλημερα|καλησπερα|καληνυχτα|καλο βραδυ|geia|geia sou|geia sas|kalimera|kalispera|kalinixta|kalinuxta|kalo vradi|hello|hi)$/.test(raw) ||
+            /^(?:γεια|γεια σου|γεια σας|χαιρετε|καλημερα|καλησπερα|καληνυχτα|καλο βραδυ|geia|geia sou|geia sas|kalimera|kalispera|kalinixta|kalinuxta|kalo vradi|kalo vardi|hello|hi)$/.test(raw) ||
             /^(?:ευχαριστω|ευχαριστω πολυ|σε ευχαριστω|να εισαι καλα|να ειστε καλα|euxaristo|euxaristo poli|na eisai kala|na eiste kala|thanks|thank you)$/.test(raw) ||
             /^(?:μπορω να ρωτησω|μπορω να ρωτησω κατι|να ρωτησω|να ρωτησω κατι|θελω να ρωτησω κατι|mporo na rotiso|mporo na rotiso kati|na rotiso|na rotiso kati|thelo na rotiso kati)$/.test(raw) ||
             /^(?:τελεια|μπραβο|ενταξει|καταλαβα|σωστα|teleia|bravo|entaxi|katalava|sosta|ok)$/.test(raw) ||
@@ -1077,6 +1077,71 @@
            Narrow, explicit rules only. These protect existing intents from
            generic words such as live / πόσο / πότε / πλοίο.
            ========================================================= */
+
+        /* FINAL LIVE-TEST GUARDS — confirmed from Blog/App regression tests. */
+
+        /* Coast Guard contact: "til" is accepted only with a Coast Guard subject. */
+        if (
+            /(?:limenarxeio|limeniko(?:\s+tmima)?|λιμεναρχειο|λιμενικο(?:\s+τμημα)?)/.test(raw) &&
+            /(?:til|tilefono|tilefona|τηλ|τηλεφωνο|τηλεφωνα)/.test(raw)
+        ) return 'contacts';
+
+        /* History: generic historical wording must not be stolen by ship details. */
+        if (
+            /^(?:istorika\s+stoixeia|ιστορικα\s+στοιχεια)$/.test(raw) ||
+            /(?:xereis|ksereis|ξερεις).*?(?:istoria|ιστορια).*?(?:grammis|γραμμης|porthmeiou|πορθμειου)/.test(raw)
+        ) return 'history';
+
+        /* General photo archive vs ship-specific photos. */
+        if (
+            /(?:φωτογραφ|fotograf)/.test(raw) &&
+            !/(?:πλοι|καραβ|ploi|karav)/.test(raw) &&
+            /(?:εχεις|exeis|υπαρχ|uparx|yparx|που\s+(?:βρισκ|vrisk|μπορω|mporo)|αρχει|arxei)/.test(raw)
+        ) return 'photos';
+
+        /* Real-time vessel movement belongs to vessel position. */
+        if (
+            /(?:κινηση|θεση|kinisi|thesi).*?(?:πλοι|καραβ|ploi|karav).*?(?:πραγματικο\s+χρονο|pragmatiko\s+xrono|real\s*time)/.test(raw) ||
+            /(?:που|pou).*?(?:βλεπω|δω|vlepo|do).*?(?:κινηση|θεση|kinisi|thesi).*?(?:πλοι|καραβ|ploi|karav)/.test(raw)
+        ) return 'vesselPosition';
+
+        /* Pets: travelling/boarding with a dog or cat. */
+        if (
+            /(?:σκυλ|γατ|skyl|skul|gat)/.test(raw) &&
+            /(?:ταξιδ|taxid|μπω|mpo|μπαινω|mpaino|mpeno|παρω|paro|φερω|fero|καραβι|πλοιο|ferry|karavi|ploio)/.test(raw)
+        ) return 'petsOnBoard';
+
+        /* POS availability phrased as a property of the vessels. */
+        if (
+            /(?:καραβια|πλοια|karavia|ploia).*?(?:διαθετ|δεχοντ|diathet|dexont).*?\bpos\b/.test(raw)
+        ) return 'payment';
+
+        /* Motorhome is a special vehicle, including common Greeklish spelling. */
+        if (/(?:τροχοσπιτο|troxospito|trokospito)/.test(raw)) return 'specialVehicles';
+
+        /* Starting/stopping means 24-hour operation, not shift frequency. */
+        if (
+            /(?:τι\s+ωρα|ποτε|ti\s+ora|pote|xereis\s+ti\s+ora).*?(?:ξεκινα|ξεκινανε|xekina|xekinane).*?(?:καραβια|πλοια|δρομολογια|karavia|ploia|dromologia)/.test(raw)
+        ) return 'continuousOperation';
+
+        /* Natural app/install wording and observed efargmogi typo. */
+        if (
+            /(?:υπαρχει|uparxei).*?(?:εφαρμογη|efarmogi|efargmogi).*?(?:πορθμειο|κινητο|porthmeio|kinito)/.test(raw) ||
+            /(?:πως|pos).*?(?:βαζω|vazo).*?(?:εφαρμογη|efarmogi|efargmogi).*?(?:κινητο|kinito)/.test(raw)
+        ) return 'install';
+
+        /* Accessibility travel/boarding vs fare. */
+        if (
+            /(?:αμεα|amea)/.test(raw) &&
+            /(?:ταξιδ|taxid|προσβασ|prosvasi|μπω|mpo|επιβιβ|epiviv)/.test(raw) &&
+            !/(?:ποσο|poso|τιμη|timi|πληρων|pliron|εκπτω|ekptos|ekptosi|ναυλ|naul|navl)/.test(raw)
+        ) return 'accessibleBoarding';
+
+        /* Politeknos Greeklish family: politekn-, polutekn-, polytekn-. */
+        if (
+            /(?:politekn|polutekn|polytekn)/.test(raw) &&
+            /(?:poso|pliron|timi|ekptos|ekptosi|ektosi|meiomen|dikaiou|karta|dikaiolog|naul|navl|kost)/.test(raw)
+        ) return 'specialFareEligibility';
 
         /* LIVE: departures must win over generic live/GPS; app name stays liveApp. */
         if (

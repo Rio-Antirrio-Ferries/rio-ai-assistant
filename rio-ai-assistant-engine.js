@@ -1023,110 +1023,6 @@
 
 
     function detectLockedIntent(text, raw, normalized, combined) {
-        /* =========================================================
-           SAFE ENRICHMENT — agreed post-FINAL additions
-           Specific full-phrase routing only. General keywords are
-           deliberately avoided so existing v1.0.0 behavior stays intact.
-           ========================================================= */
-
-        /* LIVE: keep app / departures / vessel position strictly separate. */
-        if (
-            /^(?:live\s+αναχωρησεισ|ζωντανεσ\s+αναχωρησεισ|αναχωρησεισ\s+live|live\s+departures|live\s+anaxoriseis|zontanes\s+anaxoriseis|anaxoriseis\s+live)$/.test(raw) ||
-            /^(?:που\s+βλεπω|pou\s+vlepo)\s+(?:τισ\s+)?(?:live\s+αναχωρησεισ|live\s+anaxoriseis|ζωντανεσ\s+αναχωρησεισ|zontanes\s+anaxoriseis)$/.test(raw)
-        ) return 'liveDepartures';
-
-        if (
-            /^(?:live\s+θεση\s+πλοιων|live\s+χαρτησ\s+πλοιων|θεση\s+πλοιων\s+live|live\s+thesi\s+ploion|live\s+xartis\s+ploion|thesi\s+ploion\s+live)$/.test(raw) ||
-            /^(?:θελω\s+να\s+δω|thelo\s+na\s+do)\s+(?:τα\s+)?(?:καραβια|πλοια|karavia|ploia)\s+live$/.test(raw) ||
-            /^(?:δειξε\s+μου|deikse\s+mou)\s+(?:(?:τη|την|ti|tin)\s+)?(?:θεση|κινηση|thesi|kinisi)\s+(?:των\s+)?(?:πλοιων|ploion)$/.test(raw)
-        ) return 'vesselPosition';
-
-        /* Installation: install/download/home-screen intent, never generic "app/live" alone. */
-        if (
-            /^(?:πωσ|πωσ|pos)\s+(?:κατεβαζω|katevazo)\s+(?:την\s+|tin\s+)?(?:εφαρμογη|efarmogi)$/.test(raw) ||
-            /^(?:πωσ|πωσ|pos)\s+(?:βαζω|vazo)\s+(?:το\s+|to\s+)?rio\s+antirrio\s+live\s+(?:στο|sto)\s+(?:κινητο|kinito)$/.test(raw) ||
-            /^(?:θελω|thelo)\s+(?:να\s+|na\s+)?(?:βαλω|valo)\s+(?:το\s+|to\s+)?app\s+(?:στο|sto)\s+(?:κινητο|kinito)$/.test(raw) ||
-            /^(?:πωσ|πωσ|pos)\s+(?:το\s+|to\s+)?(?:βαζω|vazo)\s+(?:στην|stin)\s+(?:αρχικη|arxiki)\s+(?:οθονη|othoni)$/.test(raw) ||
-            /^(?:πωσ|πωσ|pos)\s+(?:κανω|kano)\s+install$/.test(raw) ||
-            /^(?:μπορω|mporo)\s+(?:να\s+|na\s+)?(?:το\s+|to\s+)?(?:εγκαταστησω|egkatastiso)\s+(?:σαν|san)\s+app$/.test(raw)
-        ) return 'install';
-
-        /* Accessible boarding. Fare/discount questions remain specialFareEligibility. */
-        if (
-            !/(?:ποσο|τιμη|εκπτωση|μειωμενο\s+ναυλο|poso|timi|ekptosi|meiomeno\s+navlo)/.test(combined) &&
-            (
-                /^(?:υπαρχει|εχει|yparxei|exei)\s+(?:προσβαση|prosvasi)\s+(?:για|gia)\s+(?:αμεα|amea)$/.test(raw) ||
-                /^(?:μπορουν|mporoun)\s+(?:να\s+|na\s+)?(?:επιβιβαστουν|epivivastoun)\s+(?:αμεα|amea)$/.test(raw) ||
-                /^(?:πωσ|πωσ|pos)\s+(?:επιβιβαζονται|epivivazontai)\s+(?:τα\s+|ta\s+)?(?:αμεα|amea)$/.test(raw) ||
-                /^(?:υπαρχει|yparxei)\s+(?:βοηθεια|voitheia|εξυπηρετηση|eksypiretisi)(?:\s+(?:στην|stin)\s+(?:επιβιβαση|epivivasi))?\s+(?:για|gia)\s+(?:αμεα|amea)$/.test(raw) ||
-                /^(?:βοηθαει|voithaei)\s+(?:το\s+|to\s+)?(?:πληρωμα|pliroma)\s+(?:τα\s+|ta\s+)?(?:αμεα|amea)$/.test(raw) ||
-                /^(?:μπορω|mporo)\s+(?:να\s+|na\s+)?(?:μπω|mpo)\s+(?:με|me)\s+(?:αναπηρικο|anapiriko)\s+(?:αμαξιδιο|amaxidio)$/.test(raw) ||
-                /^(?:μπαινει|χωραει|mpainei|xoraei)\s+(?:αναπηρικο|anapiriko)\s+(?:αμαξιδιο|amaxidio)\s+(?:στο|sto)\s+(?:καραβι|πλοιο|ferry|karavi|ploio)$/.test(raw) ||
-                /^(?:υπαρχει|yparxei)\s+(?:προσβαση|prosvasi)\s+(?:με|me)\s+(?:αναπηρικο|anapiriko)\s+(?:αμαξιδιο|amaxidio)$/.test(raw) ||
-                /^(?:χρειαζομαι|xreiazomai)\s+(?:βοηθεια|voitheia)\s+(?:για\s+να\s+μπω\s+στο\s+καραβι|gia\s+na\s+mpo\s+sto\s+karavi|στην\s+επιβιβαση|stin\s+epivivasi)$/.test(raw) ||
-                /^(?:ποιον|poion)\s+(?:ενημερωνω|enimerono)\s+(?:για|gia)\s+(?:βοηθεια|voitheia)\s+(?:στην|stin)\s+(?:επιβιβαση|epivivasi)$/.test(raw) ||
-                /^(?:εχω|exo)\s+(?:κινητικο\s+προβλημα|kinitiko\s+provlima|μειωμενη\s+κινητικοτητα|meiomeni\s+kinitikotita).*?(?:μπορω|mporo).*?(?:επιβιβαστω|μπω|epivivasto|mpo)/.test(raw) ||
-                /^(?:(?:αμεα|amea)\s+(?:στο\s+)?καραβι|(?:αμεα|amea)\s+(?:επιβιβαση|epivivasi)|αναπηρικο\s+αμαξιδιο\s+στο\s+ferry|anapiriko\s+amaxidio\s+sto\s+ferry)$/.test(raw)
-            )
-        ) return 'accessibleBoarding';
-
-        /* First / last departure belongs to frequency/day-shift information. */
-        if (
-            /^(?:ποιο|ποια|poio|poia)\s+(?:(?:ειναι|einai)\s+)?(?:(?:το|to)\s+)?(?:πρωτο|τελευταιο|proto|teleutaio)(?:\s+(?:δρομολογιο|καραβι|πλοιο|dromologio|karavi|ploio))?(?:\s+(?:απο|apo)\s+(?:ριο|αντιρριο|rio|antirrio))?$/.test(raw) ||
-            /^(?:τι|ti)\s+(?:ωρα|ora)\s+(?:ξεκινανε|ξεκινουν|ksekinane|ksekinoun)\s+(?:τα\s+|ta\s+)?(?:καραβια|πλοια|karavia|ploia)$/.test(raw) ||
-            /^(?:μεχρι|mexri)\s+(?:τι|ti)\s+(?:ωρα|ora)\s+(?:εχει|exei)\s+(?:καραβια|πλοια|karavia|ploia)$/.test(raw)
-        ) return 'frequency';
-
-        /* Trip duration — protect GPS ETA phrases containing "να φτάσω στο καράβι". */
-        if (
-            !/(?:φτασω|φτανω|ftaso|ftano).*?(?:στο|στον|στην|sto|ston|stin).*?(?:καραβι|πλοιο|προβλητα|karavi|ploio|provlita)/.test(combined) &&
-            (
-                /^(?:ποση|posi)\s+(?:ωρα|ora)\s+(?:κανει|kanei)\s+(?:το\s+|to\s+)?(?:καραβι|πλοιο|ferry|karavi|ploio)$/.test(raw) ||
-                /^(?:ποση|posi)\s+(?:ωρα|ora)\s+(?:κανει|kanei)\s+(?:απεναντι|apenanti)$/.test(raw) ||
-                /^(?:poso)\s+diarkei\s+(?:(?:to)\s+)?(?:taxidi|dromologio|diadromi)$/.test(raw) ||
-                /^(?:ποσο|poso)\s+(?:διαρκει|diarkei)\s+(?:το\s+)?(?:ταξιδι|δρομολογιο|διαδρομη|taxidi|dromologio|diadromi)$/.test(raw) ||
-                /^(?:ποσο|poso)\s+(?:χρονο|xrono)\s+(?:κανει|kanei)\s+(?:το\s+|to\s+)?ferry$/.test(raw) ||
-                /^(?:ποσο|poso)\s+(?:κραταει|krataei)\s+(?:ο\s+|o\s+)?(?:διαπλουσ|diaplous)$/.test(raw) ||
-                /^(?:διαρκεια|diarkeia)\s+(?:διαπλου|diaploy|diaplou)$/.test(raw)
-            )
-        ) return 'tripDuration';
-
-        /* Booking/ticket questions reuse the locked payment answer. */
-        if (
-            /^(?:χρειαζεται|xreiazetai)\s+(?:κρατηση|kratisi)$/.test(raw) ||
-            /^(?:πρεπει|prepei)\s+(?:να\s+|na\s+)?(?:κλεισω|kleiso)\s+(?:θεση|thesi)$/.test(raw) ||
-            /^(?:κλεινω|kleino)\s+(?:εισιτηριο|eisitirio)\s+(?:απο|apo)\s+(?:πριν|prin)$/.test(raw) ||
-            /^(?:εχει|exei)\s+online\s+(?:κρατηση|kratisi)$/.test(raw) ||
-            /^(?:μπορω|mporo)\s+(?:να\s+|na\s+)?(?:κανω|kano)\s+(?:κρατηση|kratisi)\s+online$/.test(raw)
-        ) return 'payment';
-
-        /* Geographic boarding/pier phrasing — vessel position, not road navigation. */
-        if (
-            /^(?:απο|apo)\s+(?:που|pou)\s+(?:παιρνω|pairno)\s+(?:το\s+|to\s+)?(?:καραβι|πλοιο|karavi|ploio)$/.test(raw) ||
-            /^(?:που|pou)\s+(?:ειναι|einai)\s+(?:η\s+|i\s+)?(?:προβλητα|provlita)$/.test(raw) ||
-            /^(?:που|pou)\s+(?:πρεπει|prepei)\s+(?:να\s+|na\s+)?(?:παω|pao)\s+(?:για|gia)\s+(?:το\s+|to\s+)?(?:καραβι|πλοιο|karavi|ploio)$/.test(raw) ||
-            /^(?:που|pou)\s+(?:δουλευουν|doulevoun)\s+(?:τα\s+|ta\s+)?(?:καραβια|πλοια|karavia|ploia)$/.test(raw) ||
-            /^(?:απο|apo)\s+(?:ποια|poia)\s+(?:πλευρα|plevra|pleura)\s+(?:φευγει|feugei)\s+(?:το\s+|to\s+)?(?:καραβι|πλοιο|karavi|ploio)$/.test(raw) ||
-            /^(?:σε|se)\s+(?:ποια|poia)\s+(?:πλευρα|plevra|pleura)\s+(?:ειναι|einai)\s+(?:τα\s+|ta\s+)?(?:καραβια|πλοια|karavia|ploia)$/.test(raw) ||
-            /^(?:που|pou)\s+(?:γιν(?:εται|ete)|ginetai)\s+(?:η\s+|i\s+)?(?:επιβιβαση|epivivasi)$/.test(raw) ||
-            /^(?:που|pou)\s+(?:μπαινω|mpaino)\s+(?:στο|sto)\s+(?:καραβι|πλοιο|karavi|ploio)$/.test(raw)
-        ) return 'vesselPosition';
-
-        /* Photos: generic/archive photos, but never steal explicit ship-photo queries. */
-        if (
-            !/(?:φωτογραφι|fotografi).*?(?:πλοι|καραβ|plo[i]?|karav)/.test(combined) &&
-            (
-                /^(?:παλιεσ\s+φωτογραφιεσ|φωτογραφιεσ\s+αρχειου|ριο\s+καποτε|palies\s+fotografies|fotografies\s+arxeiou|rio\s+kapote)$/.test(raw) ||
-                /^(?:εχετε|υπαρχουν|exete|yparxoun)\s+(?:φωτογραφιεσ|fotografies)$/.test(raw) ||
-                /^(?:θελω|thelo)\s+(?:να\s+|na\s+)?(?:δω|do)\s+(?:φωτογραφιεσ|fotografies)$/.test(raw)
-            )
-        ) return 'photos';
-
-        /* Operational count/current assigned vessel must never fall into ship details. */
-        if (
-            /^(?:ποσα|posa)\s+(?:πλοια|καραβια|ploia|karavia)\s+(?:ειναι\s+)?(?:σε\s+)?(?:λειτουργια|leitourgia)\s+(?:τωρα|tora)$/.test(raw) ||
-            /^(?:ποσα|posa)\s+(?:πλοια|καραβια|ploia|karavia)\s+(?:δουλευουν|doulevoun)\s+(?:τωρα|tora)$/.test(raw)
-        ) return 'assignedVesselUnavailable';
         /* 01. SOCIAL — exact matching μόνο, για μηδενικές συγκρούσεις με operational intents. */
         if (
             /^(?:γεια|γεια σου|γεια σας|χαιρετε|καλημερα|καλησπερα|καληνυχτα|καλο βραδυ|geia|geia sou|geia sas|kalimera|kalispera|kalinixta|kalinuxta|kalo vradi|hello|hi)$/.test(raw) ||
@@ -1175,6 +1071,98 @@
             /^(?:ανηκει|anikei)\s+(?:στο|στις|sto|stis)\s+(?:λιμενικο|limeniko|λιμεναρχειο|limenarxeio|πλοιοκτητριες\s+εταιρειες|ploioktitries\s+etaireies)$/.test(raw) ||
             /^(?:ειναι|einai)\s+(?:του|tou)\s+(?:κρατους|kratous)$/.test(raw)
         ) return 'assistantAbout';
+
+        /* =========================================================
+           SAFE ENRICHMENT GUARDS — v1.0.0
+           Narrow, explicit rules only. These protect existing intents from
+           generic words such as live / πόσο / πότε / πλοίο.
+           ========================================================= */
+
+        /* LIVE: departures must win over generic live/GPS; app name stays liveApp. */
+        if (
+            /(?:live)\s+(?:αναχωρ|anaxor|departures?)/.test(raw) ||
+            /(?:ζωνταν|zontan).*?(?:αναχωρ|anaxor)/.test(raw)
+        ) return 'liveDepartures';
+
+        /* Install: installation wording wins even when "Rio-Antirrio Live" is present. */
+        if (
+            /(?:πως|πωσ|pos).*?(?:κατεβαζω|katevazo).*?(?:εφαρμογη|efarmogi|app)/.test(raw) ||
+            /(?:πως|πωσ|pos).*?(?:βαζω|vazo).*?(?:rio\s+antirrio\s+live|εφαρμογη|efarmogi|app).*?(?:κινητο|kinito)/.test(raw) ||
+            /(?:θελω|thelo).*?(?:βαλω|valo).*?(?:εφαρμογη|efarmogi|app).*?(?:κινητο|kinito)/.test(raw) ||
+            /(?:πως|πωσ|pos)\s+(?:το|to)\s+(?:βαζω|vazo)\s+(?:στην|stin)\s+(?:αρχικη|arxiki)\s+(?:οθονη|othoni)/.test(raw) ||
+            /(?:πως|πωσ|pos).*?(?:εικονιδιο|eikonidio).*?(?:αρχικη|arxiki)/.test(raw) ||
+            /(?:μπορω|mporo).*?(?:εγκαταστησω|egkatastiso).*?(?:εφαρμογη|efarmogi|app)/.test(raw)
+        ) return 'install';
+
+        /* First/last departure are part of 24-hour operation. */
+        if (
+            /(?:πρωτο|proto|τελευταιο|teleutaio).*?(?:δρομολογιο|καραβι|πλοιο|dromologio|karavi|ploio)/.test(raw) ||
+            /(?:πρωτο|proto|τελευταιο|teleutaio)\s+(?:απο|apo)\s+(?:ριο|αντιρριο|rio|antirrio|antirio|antiriro)/.test(raw) ||
+            /(?:τι\s+ωρα|ti\s+ora).*?(?:ξεκινα|ksekina).*?(?:καραβια|πλοια|δρομολογια|karavia|ploia|dromologia)/.test(raw) ||
+            /(?:μεχρι\s+τι\s+ωρα|mexri\s+ti\s+ora).*?(?:καραβια|πλοια|δρομολογια|karavia|ploia|dromologia)/.test(raw)
+        ) return 'continuousOperation';
+
+        /* Accessibility is distinct from reduced fare. */
+        if (
+            (/(?:αμεα|amea)/.test(raw) && /(?:προσβασ|prosvasi|επιβιβ|epiviv|βοηθ|voith|εξυπηρετ|eksypiret|μπω|μπαινω|mpo|mpaino|mpeno)/.test(raw)) ||
+            /(?:αναπηρ|anapir).*?(?:αμαξιδ|amaxid)/.test(raw) ||
+            /(?:κινητικ|kinitik).*?(?:προβλημα|provlima|κινητικοτητα|kinitikot|επιβιβ|epiviv|μπω|mpo)/.test(raw) ||
+            /^(?:αμεα|amea)\s+(?:στο|sto)\s+(?:καραβι|πλοιο|karavi|ploio)$/.test(raw)
+        ) return 'accessibleBoarding';
+
+        /* Reduced fare: keep generic eligibility wording in the reduced-fare category. */
+        if (
+            /^(?:τι|ti)\s+(?:χρειαζεται|xreiazetai)\s+(?:για|gia)\s+(?:μειωμενο|meiomeno)\s+(?:ναυλο|naulo|navlo)$/.test(raw) ||
+            /^(?:ποιες|poies)\s+(?:ειναι|einai)\s+(?:οι|oi)\s+(?:προυποθεσεις|proypotheseis)\s+(?:για|gia)\s+(?:μειωμενο|meiomeno)\s+(?:ναυλο|naulo|navlo)$/.test(raw) ||
+            /^(?:ποιοι|poioi)\s+(?:δικαιουνται|dikaiountai)\s+(?:μειωμενο|meiomeno)\s+(?:ναυλο|naulo|navlo)$/.test(raw) ||
+            /(?:ποιε|poie).*?(?:προυποθεσ|proypothes).*?(?:μειωμεν|meiomen).*?(?:ναυλ|naul|navl)/.test(raw) ||
+            /(?:τριτεκν|tritekn).*?(?:πολυτεκν|politekn|polytekn)/.test(raw)
+        ) return 'specialFareEligibility';
+
+        /* Photos: ship-specific photos stay shipsDetails; archive/general photos go photos. */
+        if (/(?:φωτογραφ|fotograf)/.test(raw) && /(?:πλοι|καραβ|ploi|karav)/.test(raw)) return 'shipsDetails';
+        if (/(?:φωτογραφ|fotograf)/.test(raw) && /(?:υπαρχ|εχετε|θελω|δω|δειτε|αρχει|καποτε|uparx|yparx|exete|thelo|do|arxei|kapote)/.test(raw)) return 'photos';
+
+        /* Departure point / working side. */
+        if (
+            /(?:απο\s+που|που|apo\s+pou|pou)\s+(?:παιρνω|περνω|pairno|perno|pernw|painrno)\s+(?:(?:το|to)\s+)?(?:καραβι|πλοιο|karavi|ploio)/.test(raw) ||
+            /(?:που|pou)\s+(?:πρεπει|prepei)\s+(?:να\s+|na\s+)?(?:παω|pao)\s+(?:για|gia)\s+(?:(?:το|to)\s+)?(?:καραβι|πλοιο|karavi|ploio)/.test(raw) ||
+            /(?:δειξε|deikse).*?(?:θεση|κινηση|thesi|kinisi).*?(?:πλοι|καραβ|ploi|karav)/.test(raw)
+        ) return 'departurePoint';
+        if (
+            /(?:απο\s+ποια|apo\s+poia)\s+(?:πλευρα|plevra).*?(?:καραβι|πλοιο|karavi|ploio)/.test(raw) ||
+            /(?:σε\s+ποια|se\s+poia)\s+(?:πλευρα|plevra).*?(?:καραβια|πλοια|karavia|ploia)/.test(raw)
+        ) return 'vesselPosition';
+
+        /* Active/assigned vessel information is intentionally unavailable. */
+        if (
+            /^(?:ποσα|ποια|ποιο|posa|poia|poio)\s+(?:πλοια|καραβια|πλοιο|καραβι|ploia|karavia|ploio|karavi).*?(?:δουλευουν|δουλευει|λειτουργουν|λειτουργει|ειναι\s+σε\s+λειτουργια|ειναι\s+σε\s+υπηρεσια|εκτελουν|εκτελει|doulevoun|doulevei|leitourgoun|leitourgei|einai\s+se\s+leitourgia|einai\s+se\s+ypiresia|ekteloun|ektelei)/.test(raw)
+        ) return 'assignedVesselUnavailable';
+
+        /* Crossing duration — explicitly exclude arrival/GPS wording. */
+        if (
+            !/(?:φτασω|φτανω|ftaso|ftano|προβλητα|provlita|gps|απεχω|apexo)/.test(combined) &&
+            (
+                /(?:ποση|posi)\s+(?:ωρα|ora)\s+(?:κανει|kanei)\s+(?:(?:το|to)\s+)?(?:καραβι|πλοιο|ferry|karavi|ploio)/.test(combined) ||
+                /(?:ποσο|poso)\s+(?:χρονο|xrono)\s+(?:κανει|kanei)\s+(?:(?:το|to)\s+)?(?:καραβι|πλοιο|ferry|karavi|ploio)/.test(combined) ||
+                /(?:ποσο|poso)\s+(?:διαρκει|diarkei)\s+(?:(?:το|to)\s+)?(?:ταξιδι|διαδρομη|διαπλουσ|taxidi|diadromi|diaplous)/.test(combined) ||
+                /(?:διαρκεια|diarkeia)\s+(?:διαπλου|diaplou)/.test(combined) ||
+                /(?:ποση|posi)\s+(?:ωρα|ora)\s+(?:κανει|kanei)\s+(?:απεναντι|apenanti)/.test(combined)
+            )
+        ) return 'tripDuration';
+
+        /* Booking/ticket wording uses the existing payment answer. */
+        if (
+            /(?:χρειαζεται|xreiazetai|πρεπει|prepei).*?(?:κρατηση|kratisi|κλεισω\s+θεση|kleiso\s+thesi|κλεισω\s+εισιτηριο|kleiso\s+eisitirio)/.test(combined) ||
+            /(?:κλεινω|kleino|βγαζω|vgazo).*?(?:εισιτηριο|eisitirio).*?(?:απο\s+πριν|apo\s+prin)/.test(combined) ||
+            /(?:online).*?(?:κρατηση|kratisi)/.test(combined)
+        ) return 'payment';
+
+        /* Keep small registered categories alive. */
+        if (/(?:επιτρεπονται|epitrepontai).*?(?:ζωα|zoa).*?(?:καραβι|πλοιο|karavi|ploio)/.test(raw)) return 'petsOnBoard';
+        if (/(?:ποτε|pote).*?(?:ξεκινησε|ksekinise).*?(?:πορθμειο|porthmeio)/.test(raw)) return 'history';
+        if (/^(?:καιρικ|kairik).*?(?:συνθηκ|synthik)/.test(raw)) return 'weather';
+        if (/^(?:τι|ti)\s+(?:απαντ|apant)/.test(raw)) return 'assistantCapabilities';
 
         /* FINAL LOCKED TESTS — 11 Αυγούστου 2026. Narrow guards only. */
         if (/^(?:σε\s+ποιον|se\s+poion)\s+(?:ανηκεις|anikeis)$/.test(raw) || /^(?:που|pou)\s+(?:ανηκεις|anikeis)$/.test(raw) || /^(?:ποιος|poios)\s+(?:ειναι\s+|einai\s+)?(?:ο\s+|o\s+)?(?:ιδιοκτητης|idioktitis)$/.test(raw) || /^(?:ποιος\s+ειναι\s+πισω\s+απο\s+εσενα|poios\s+einai\s+piso\s+apo\s+esena)$/.test(raw)) return 'assistantAbout';
@@ -3136,63 +3124,12 @@
         return '';
     }
 
-    function answerAccessibleBoarding() {
-        return '<strong>♿ Πρόσβαση &amp; εξυπηρέτηση ΑμεΑ</strong><br><br>' +
-            'Για την εξυπηρέτηση επιβατών με αναπηρία ή μειωμένη κινητικότητα προβλέπεται συνδρομή κατά την πρόσβαση και τη μετακίνησή τους στο πλοίο.<br><br>' +
-            'Επειδή οι δυνατότητες πρόσβασης μπορεί να διαφέρουν ανάλογα με το πλοίο που εκτελεί το συγκεκριμένο δρομολόγιο, για ειδικές ανάγκες επιβίβασης ή μετακίνησης συνιστάται να ενημερώνετε <strong>αρμόδιο μέλος του πληρώματος πριν από την επιβίβασή σας</strong>.<br><br>' +
-            'Για πρόσθετες πληροφορίες μπορείτε επίσης να απευθύνεστε στις <strong>Λιμενικές Αρχές</strong>.';
-    }
-
     function answerFrequency(userText) {
         const rio = getScheduleArray('dRio');
         const ant = getScheduleArray('dAnt');
         const raw = normalizeRawQuery(userText || '');
         const normalized = normalizeText(userText || '');
         const frequencyQuery = raw + ' ' + normalized;
-
-        /* First / last departure is derived from the current schedule arrays. */
-        const asksFirst = /(?:πρωτο|proto)/.test(frequencyQuery);
-        const asksLast = /(?:τελευταιο|teleutaio)/.test(frequencyQuery) ||
-            /(?:μεχρι\s+τι\s+ωρα|mexri\s+ti\s+ora)\s+(?:εχει|exei)\s+(?:καραβια|πλοια|karavia|ploia)/.test(frequencyQuery);
-        const asksStart = /(?:τι\s+ωρα|ti\s+ora)\s+(?:ξεκινα|ksekina)/.test(frequencyQuery);
-
-        function edgeDeparture(schedule, wantLast) {
-            const parsed = schedule
-                .map(function (timeStr) {
-                    const parsedTime = parseTime(timeStr);
-                    return parsedTime ? { text: String(timeStr).trim(), total: parsedTime.total } : null;
-                })
-                .filter(Boolean)
-                .sort(function (a, b) { return a.total - b.total; });
-            if (!parsed.length) return '';
-            return (wantLast ? parsed[parsed.length - 1] : parsed[0]).text;
-        }
-
-        if (asksFirst || asksLast || asksStart) {
-            const requestedPortForEdge = detectPort(userText || '');
-            const wantLast = asksLast;
-            const rioEdge = edgeDeparture(rio, wantLast);
-            const antEdge = edgeDeparture(ant, wantLast);
-            const label = wantLast ? 'Τελευταίο δρομολόγιο' : 'Πρώτο δρομολόγιο';
-
-            if (requestedPortForEdge === 'rio') {
-                return '<strong>' + label + ' από Ρίο</strong><br><br>' +
-                    (rioEdge
-                        ? 'Σύμφωνα με το ισχύον πρόγραμμα: <strong>' + escapeHtml(rioEdge) + '</strong>.'
-                        : 'Δεν βρέθηκαν διαθέσιμα δεδομένα δρομολογίων από Ρίο.');
-            }
-
-            if (requestedPortForEdge === 'ant') {
-                return '<strong>' + label + ' από Αντίρριο</strong><br><br>' +
-                    (antEdge
-                        ? 'Σύμφωνα με το ισχύον πρόγραμμα: <strong>' + escapeHtml(antEdge) + '</strong>.'
-                        : 'Δεν βρέθηκαν διαθέσιμα δεδομένα δρομολογίων από Αντίρριο.');
-            }
-
-            return '<strong>' + label + '</strong><br><br>' +
-                '• Από Ρίο: <strong>' + (rioEdge ? escapeHtml(rioEdge) : '—') + '</strong><br>' +
-                '• Από Αντίρριο: <strong>' + (antEdge ? escapeHtml(antEdge) : '—') + '</strong>';
-        }
 
         const periods = [
             {
@@ -3557,7 +3494,7 @@
 
     function answerLiveApp() {
         return '<strong>Rio-Antirrio Live</strong><br><br>' +
-            'Επισκεφθείτε την εφαρμογή Rio-Antirrio Live για ζωντανή ενημέρωση σχετικά με ' +
+            'Επισκεφθείτε την εφαρμογή Rio-Antirrio Live για ενημέρωση σε πραγματικό χρόνο σχετικά με ' +
             'τα δρομολόγια, τον καιρό, τη θέση των πλοίων, την απόστασή σας από το πορθμείο ' +
             'και τον χρόνο που χρειάζεστε για να φτάσετε.<br><br>' +
             '🔗 <a href="' + CONFIG.liveAppUrl +
@@ -3574,7 +3511,7 @@
 
     function answerLiveDepartures() {
         return '<strong>Live αναχωρήσεις:</strong><br><br>' +
-            'Για ζωντανές αναχωρήσεις επισκεφθείτε τη σχετική σελίδα.<br><br>' +
+            'Για ενημέρωση αναχωρήσεων σε πραγματικό χρόνο, επισκεφθείτε τη σχετική σελίδα.<br><br>' +
             '🔗 <a href="' + CONFIG.links.liveDepartures +
             '" target="_blank" rel="noopener noreferrer">Live Αναχωρήσεις</a>';
     }
@@ -3743,6 +3680,13 @@
             'Για <strong>τιμές διοδίων, οχήματα, εκπτωτικά προγράμματα και άλλες πληροφορίες σχετικά με τη Γέφυρα Ρίου–Αντιρρίου</strong>, παρακαλώ συμβουλευτείτε την επίσημη ιστοσελίδα της Γέφυρας.';
     }
 
+    function answerAccessibleBoarding() {
+        return '<strong>♿ Πρόσβαση &amp; εξυπηρέτηση ΑμεΑ</strong><br><br>' +
+            'Για την εξυπηρέτηση επιβατών με αναπηρία ή μειωμένη κινητικότητα προβλέπεται συνδρομή κατά την πρόσβαση και τη μετακίνησή τους στο πλοίο.<br><br>' +
+            'Επειδή οι δυνατότητες πρόσβασης μπορεί να διαφέρουν ανάλογα με το πλοίο που εκτελεί το συγκεκριμένο δρομολόγιο, για ειδικές ανάγκες επιβίβασης ή μετακίνησης συνιστάται να ενημερώνετε <strong>αρμόδιο μέλος του πληρώματος</strong> πριν από την επιβίβασή σας.<br><br>' +
+            'Για πρόσθετες πληροφορίες μπορείτε επίσης να απευθύνεστε στις <strong>Λιμενικές Αρχές</strong>.';
+    }
+
     function answerSpecialFareEligibility() {
         const reducedFarePrice = findPriceByTerms([
             'πολυτεκνικο αμεα',
@@ -3773,25 +3717,57 @@
             'Η σελίδα <strong>Rio-Antirrio Ferries</strong>, η εφαρμογή <strong>Rio-Antirrio Live</strong> και ο <strong>Rio Ai Assistant</strong> δεν διαθέτουν πληροφορίες για το <strong>ποιο συγκεκριμένο πλοίο εκτελεί κάθε δρομολόγιο ή πόσα πλοία εργάζονται κάθε στιγμή</strong>, καθώς αυτά αφορούν την <strong>εσωτερική λειτουργία και επιχειρησιακή οργάνωση της γραμμής</strong>.';
     }
 
-    function answerContinuousOperation() {
+    function answerContinuousOperation(userText) {
+        const query = normalizeRawQuery(userText || '') + ' ' + normalizeText(userText || '');
+        const asksFirst = /(?:πρωτο|προτο|proto)/.test(query);
+        const asksLast = /(?:τελευταιο|teleutaio)/.test(query);
+
+        function edgeTime(schedule, wantLast) {
+            const valid = (Array.isArray(schedule) ? schedule : [])
+                .map(function (timeStr) {
+                    const parsed = parseTime(timeStr);
+                    return parsed ? { time: String(timeStr).trim(), total: parsed.total } : null;
+                })
+                .filter(Boolean)
+                .sort(function (a, b) { return a.total - b.total; });
+            if (!valid.length) return '';
+            return wantLast ? valid[valid.length - 1].time : valid[0].time;
+        }
+
+        if (asksFirst || asksLast) {
+            const wantLast = asksLast;
+            const port = detectPort(userText || '');
+            const rioTime = edgeTime(getScheduleArray('dRio'), wantLast);
+            const antTime = edgeTime(getScheduleArray('dAnt'), wantLast);
+            const label = wantLast ? 'Τελευταίο δρομολόγιο' : 'Πρώτο δρομολόγιο';
+            let result = '<strong>' + label + ' — 24ωρη λειτουργία</strong><br><br>' +
+                'Τα πλοία στο πορθμείο εκτελούν δρομολόγια όλο το 24ωρο, σύμφωνα με το πρόγραμμα, εκτός έκτακτων συνθηκών.';
+
+            if (port === 'rio') {
+                return result + '<br><br>• Από Ρίο: <strong>' + escapeHtml(rioTime || 'Μη διαθέσιμο') + '</strong>';
+            }
+            if (port === 'ant') {
+                return result + '<br><br>• Από Αντίρριο: <strong>' + escapeHtml(antTime || 'Μη διαθέσιμο') + '</strong>';
+            }
+            return result +
+                '<br><br>• Από Ρίο: <strong>' + escapeHtml(rioTime || 'Μη διαθέσιμο') + '</strong>' +
+                '<br>• Από Αντίρριο: <strong>' + escapeHtml(antTime || 'Μη διαθέσιμο') + '</strong>';
+        }
+
         const base =
             '<strong>Λειτουργία δρομολογίων</strong><br><br>' +
             'Τα πλοία στο πορθμείο εκτελούν δρομολόγια όλο το 24ωρο, σύμφωνα με ' +
             'τα προγραμματισμένα δρομολόγια, εκτός έκτακτων συνθηκών.';
 
         if (isInsideLiveApp()) {
-            return base +
-                '<br><br>Για λεπτομέρειες, ρωτήστε «Πρόγραμμα Δρομολογίων».';
+            return base + '<br><br>Για λεπτομέρειες, ρωτήστε «Πρόγραμμα Δρομολογίων».';
         }
 
         return base +
             '<br><br><strong>Για περισσότερες πληροφορίες:</strong><br><br>' +
-            '🔗 <a href="https://rio-antirrio.blogspot.com/2018/08/dromologia.html" ' +
-            'target="_blank" rel="noopener noreferrer">Δρομολόγια Πλοίων</a><br><br>' +
-            '🔗 <a href="' + CONFIG.liveDeparturesUrl +
-            '" target="_blank" rel="noopener noreferrer">Live Αναχωρήσεις</a><br><br>' +
-            '📱 <a href="' + CONFIG.liveAppUrl +
-            '" target="_blank" rel="noopener noreferrer">Rio-Antirrio Live</a>';
+            '🔗 <a href="https://rio-antirrio.blogspot.com/2018/08/dromologia.html" target="_blank" rel="noopener noreferrer">Δρομολόγια Πλοίων</a><br><br>' +
+            '🔗 <a href="' + CONFIG.links.liveDepartures + '" target="_blank" rel="noopener noreferrer">Live Αναχωρήσεις</a><br><br>' +
+            '📱 <a href="' + CONFIG.liveAppUrl + '" target="_blank" rel="noopener noreferrer">Rio-Antirrio Live</a>';
     }
 
     function answerInstall() {
@@ -4096,9 +4072,9 @@
             case 'statusToday': return answerStatusToday(userText);
             case 'futureScheduleInfo': return answerFutureScheduleInfo();
             case 'frequency': return answerFrequency(userText);
-            case 'accessibleBoarding': return answerAccessibleBoarding();
-            case 'continuousOperation': return answerContinuousOperation();
+            case 'continuousOperation': return answerContinuousOperation(userText);
             case 'bridgeInfo': return answerBridgeInfo();
+            case 'accessibleBoarding': return answerAccessibleBoarding();
             case 'specialFareEligibility': return answerSpecialFareEligibility();
             case 'petsOnBoard': return answerPetsOnBoard();
             case 'assignedVesselUnavailable': return answerAssignedVesselUnavailable();
@@ -4262,7 +4238,7 @@
         const body = document.getElementById('aiChatBody');
         if (body) {
             body.innerHTML =
-                '<div class="ai-msg bot">Είμαι ο Rio Ai Assistant. Πώς μπορώ να σας βοηθήσω σχετικά με το πορθμείο;;</div>';
+                '<div class="ai-msg bot">Είμαι ο Rio Ai Assistant. Πώς μπορώ να σας βοηθήσω σχετικά με το πορθμείο;</div>';
         }
 
         const input = document.getElementById('aiInput');

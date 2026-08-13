@@ -833,15 +833,17 @@
                 'i karta triteknou isxyei', 'dikaiologitika triteknon', 'ti dikaiologitika theloun oi triteknoi',
                 'ti dikaiologitika xreiazontai oi triteknoi', 'oi triteknoi poso plironoun', 'poso plironoun oi triteknoi',
                 'poso plironei o triteknos', 'poso plironei to tritekniko', 'timi triteknou',
-                'timi triteknikou', 'meiomeno naulo triteknon'
+                'timi triteknikou', 'meiomeno naulo triteknon',
+                'poso plironoun oi poluteknoi', 'timi poluteknou', 'ekptosi poluteknon',
+                'ektosi poluteknon', 'eimai poluteknos poso plirono', 'oi poluteknoi dikaiountai ekptosi'
             ],
             keywords: [
                 'πολυτεκν', 'αμεα', 'τριτεκν', 'μειωμεν', 'εκπτωση', 'δικαιολογητικ',
-                'politekn', 'polytekn', 'amea', 'tritekn', 'meiomen', 'ekptosi', 'dikaiolog'
+                'politekn', 'polutekn', 'polytekn', 'amea', 'tritekn', 'meiomen', 'ekptosi', 'ektosi', 'dikaiolog'
             ],
             requiredAny: [
                 'πολυτεκν', 'αμεα', 'τριτεκν',
-                'politekn', 'polytekn', 'amea', 'tritekn'
+                'politekn', 'polutekn', 'polytekn', 'amea', 'tritekn'
             ]
         },
 
@@ -874,7 +876,9 @@
                 'epitrepontai katsikes sto ploio',
                 'metaferontai aloga',
                 'epitrepontai oikosita zoa',
-                'epitrepontai paragogika zoa'
+                'epitrepontai paragogika zoa',
+                'mporo na taxidepso me ton skylo mou', 'mporo na taxidepso me ton skulo mou',
+                'mporo na taxidepso me tin gata mou', 'mporo na mpo sto ploio me ton skylo mou'
             ],
             keywords: [
                 'κατοικιδ', 'σκυλ', 'γατ', 'μελωδικ',
@@ -903,7 +907,7 @@
                 'istoria porthmeiou',
                 'istoria grammis',
                 'istoria riou antirriou',
-                'pote ksekinise to porthmeio'
+                'pote ksekinise to porthmeio', 'istorika stoixeia', 'xereis tin istoria tis grammis'
             ],
             keywords: [
                 'ιστορια', 'παλια', 'ξεκινησε',
@@ -925,7 +929,7 @@
                 'palies fotografies', 'rio kapote', 'fotografies arxeiou',
                 'yparxoun fotografies', 'uparxoun fotografies',
                 'exete fotografies', 'thelo na do fotografies',
-                'pou exei fotografies', 'fotografiko arxeio'
+                'pou exei fotografies', 'fotografiko arxeio', 'exeis fotografies', 'pou vrisko fotografies', 'pou mporo na vro fotografies'
             ],
             keywords: [
                 'φωτογραφια', 'φωτογραφιεσ', 'αρχειο', 'καποτε',
